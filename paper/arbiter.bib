@@ -416,14 +416,23 @@
   note    = {VERIFY authors}
 }
 
-% [PARTIAL] SAVI / e-processes / testing-by-betting for AI audits.
-@article{feng2026auditing,
-  author  = {Feng, others},
+% [VERIFIED authors -- CORRECTED. Previously recorded as "Feng, others",
+% which was wrong: Feng is the LAST author, not the first.]
+%
+% THE SINGLE MOST OVERLAPPING PAPER on the statistics axis. SAVI,
+% testing-by-betting, simultaneous e-processes, and a "dueling nulls"
+% construction (the model's null vs the auditor's null) for adaptive AI
+% auditing. Our differentiator: their audited system is FIXED and
+% NON-STRATEGIC -- the game is auditor-search against a static model. One
+% modelling step away from us. Cite prominently; omitting it would be the
+% clearest sign we had not done the reading.
+@article{zhou2026adaptive,
+  author  = {Zhou and Vossler and Sivaraman and Mai and Feng},
   title   = {Adaptive Auditing of {AI} Systems with
              Anytime-Valid Guarantees},
   journal = {arXiv preprint arXiv:2605.07002},
   year    = {2026},
-  note    = {VERIFY full author list}
+  note    = {No venue listed. VERIFY author given names}
 }
 
 % [PARTIAL] Anytime-valid FDR under optional stopping -- the multiplicity
@@ -1035,9 +1044,24 @@
   note      = {Also ECAI 2023, doi 10.3233/FAIA230462}
 }
 
-% [VERIFIED via AAMAS 2026 TOC, p.753] Adaptive agent evaluation without an
-% anytime-valid guarantee. The report's note: "reviewers will expect this
-% one." Closest AAMAS work to our adaptive-probing setting.
+% [VERIFIED in full text] AAMAS 2026 p.753, Research Paper Track, all authors
+% Google DeepMind (Larson also Waterloo). Preprint arXiv:2601.07651v2.
+%
+% Verified NON-STRATEGIC: agents are fixed stochastic sources, "s(v,a) ~
+% S_{v,a}", score means drawn once from a Mallows model and held fixed. The
+% words strategic / manipulate / sandbag / deceive / incentive / exploit /
+% collusion / non-stationary do NOT appear. Objective is sample-efficient
+% ranking recovery, not information maximisation, and MOST BASELINES USE
+% UNIFORM RANDOM SELECTION -- their own conclusion says "only a few of the
+% algorithms we compared adaptively modified the task selection".
+%
+% So we must NOT claim their methods break under sandbagging; most do not
+% target aggressively enough to leak. The honest framing is that the
+% direction they identify as the frontier is exactly where leakage bites.
+%
+% Their future work is a direct invitation: "Future work could derive formal
+% properties and statistical approximation guarantees as a function of the
+% number of rounds." Quote it in the intro.
 @inproceedings{lanctot2026active,
   author    = {Lanctot, Marc and Larson, Kate and Gemp, Ian and Kaisers, Michael},
   title     = {Active Evaluation of General Agents: Problem Definition and
@@ -1045,7 +1069,67 @@
   booktitle = {Proc.\ of the 25th International Conference on Autonomous
                Agents and Multiagent Systems (AAMAS)},
   pages     = {753},
-  year      = {2026}
+  year      = {2026},
+  note      = {arXiv:2601.07651}
+}
+
+% [VERIFIED] NeurIPS 2025 *workshop* (Reliable ML from Unreliable Data), NOT
+% main track. CRITICAL: a rational agent optimally sandbags to avoid
+% deactivation, AND the paper gives a STATISTICAL TEST separating sandbagging
+% from incompetence using test-score sequences. Fixed-sample, not
+% anytime-valid, and no allocation problem.
+%
+% Consequence for our positioning: we may NOT claim novelty for "a
+% statistical test for a strategically underperforming agent" -- that is
+% theirs. Our differentiator is anytime-validity plus adaptive, unpredictable
+% allocation. Note Wooldridge is a senior AAMAS figure and plausibly in our
+% reviewer pool.
+@inproceedings{dyer2025sandbagging,
+  author    = {Dyer, Joel and Jarne Ornia, Daniel and Bishop, Nicholas
+               and Calinescu, Radu and Wooldridge, Michael},
+  title     = {Sandbagging in a Simple Survival Bandit Problem},
+  booktitle = {NeurIPS Workshop on Reliable Machine Learning from
+               Unreliable Data},
+  year      = {2025},
+  note      = {arXiv:2509.26239. VERIFY author given names}
+}
+
+% [PARTIAL] Auditing games for sandbagging; no sequential error control.
+@article{taylor2025auditinggames,
+  author  = {Taylor and Black and Bowen and others},
+  title   = {Auditing Games for Sandbagging},
+  journal = {arXiv preprint arXiv:2512.07810},
+  year    = {2025},
+  note    = {VERIFY author list and full title}
+}
+
+% [VERIFIED authors] ICLR 2025 -- full author list resolved.
+@inproceedings{vanderweij2025sandbagging_full,
+  author    = {van der Weij, Teun and Hofst{\"a}tter, Felix and Jaffe, Ollie
+               and Brown, Samuel F. and Ward, Francis Rhys},
+  title     = {{AI} Sandbagging: Language Models can Strategically
+               Underperform on Evaluations},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2025},
+  note      = {arXiv:2406.07358. DUPLICATE of vanderweij2025sandbagging --
+               merge these two before submission}
+}
+
+% [PARTIAL] Anytime-valid machinery at a top venue, no strategic agent.
+@inproceedings{kilian2025anytime,
+  author    = {Kilian and Cortinovis and Caron},
+  title     = {Anytime-Valid, Bayes-Assisted, Prediction-Powered Inference},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2025},
+  note      = {VERIFY author given names}
+}
+
+@inproceedings{lindon2025anytime,
+  author    = {Lindon, Michael and Kallus, Nathan},
+  title     = {Anytime-Valid A/B Testing of Counting Processes},
+  booktitle = {International Conference on Artificial Intelligence and
+               Statistics (AISTATS)},
+  year      = {2025}
 }
 
 % [VERIFIED via AAMAS 2026 TOC, p.4] Strategic multi-agent oversight and
