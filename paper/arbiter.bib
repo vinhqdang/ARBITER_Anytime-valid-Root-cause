@@ -1,3 +1,236 @@
 %%% ARBITER bibliography.
-%%% Every entry must be verified against the real record before it ships:
-%%% AAMAS area chairs may desk reject papers with hallucinated citations.
+%%%
+%%% VERIFICATION DISCIPLINE: AAMAS area chairs may desk reject papers with
+%%% hallucinated citations. Every entry carries a STATUS comment:
+%%%   [VERIFIED]   — record confirmed against a real URL/DOI, fields checked
+%%%   [PARTIAL]    — paper confirmed to exist, some fields unchecked
+%%%   [UNVERIFIED] — sourced from an agent report or memory; MUST be checked
+%%% Nothing may ship in the submitted PDF while still marked UNVERIFIED.
+%%%
+%%% Sourced from the prior-art sweep of 2026-08-21. These are must-cites:
+%%% the active-diagnosis and active-probing literatures substantially overlap
+%%% earlier framings of this project, and omitting them reads as unawareness.
+
+
+%%% ===================================================================
+%%% Active diagnosis / discrete-event systems
+%%% ===================================================================
+
+% [PARTIAL] Paper is real and canonical. NOTE: the sweep returned a Springer
+% LNCS chapter URL (BFb0033534) for what it cited as an IEEE TAC 40(9) 1995
+% article — venue/URL mismatch. Resolve before citing; the TAC record is the
+% one we want.
+@article{sampath1995diagnosability,
+  author  = {Sampath, Meera and Sengupta, Raja and Lafortune, St{\'e}phane
+             and Sinnamohideen, Kasim and Teneketzis, Demosthenis},
+  title   = {Diagnosability of Discrete-Event Systems},
+  journal = {IEEE Transactions on Automatic Control},
+  volume  = {40},
+  number  = {9},
+  year    = {1995},
+  note    = {VERIFY volume/number/pages}
+}
+
+% [PARTIAL] The most severe overlap with the "intervention is necessary for
+% identifiability" framing: synthesises a controller that actively forces
+% events to make a non-diagnosable system diagnosable.
+@article{sampath1998active,
+  author  = {Sampath, Meera and Lafortune, St{\'e}phane and Teneketzis, Demosthenis},
+  title   = {Active Diagnosis of Discrete-Event Systems},
+  journal = {IEEE Transactions on Automatic Control},
+  volume  = {43},
+  number  = {7},
+  pages   = {908--929},
+  year    = {1998},
+  note    = {VERIFY pages}
+}
+
+% [PARTIAL] Probabilistic extension; EXPTIME-completeness of active
+% diagnosability. URL returned: https://inria.hal.science/hal-00930919
+@inproceedings{bertrand2014active,
+  author    = {Bertrand, Nathalie and Fabre, {\'E}ric and Haar, Stefan
+               and Haddad, Serge and H{\'e}lou{\"e}t, Lo{\"\i}c},
+  title     = {Active Diagnosis for Probabilistic Systems},
+  booktitle = {Foundations of Software Science and Computation Structures (FoSSaCS)},
+  year      = {2014}
+}
+
+
+%%% ===================================================================
+%%% Model-based diagnosis
+%%% ===================================================================
+
+% [UNVERIFIED] Bibliographic details came from agent memory, not a fetched
+% record. Canonical paper, but CHECK volume/pages before citing.
+@article{reiter1987diagnosis,
+  author  = {Reiter, Raymond},
+  title   = {A Theory of Diagnosis from First Principles},
+  journal = {Artificial Intelligence},
+  year    = {1987},
+  note    = {VERIFY volume/pages}
+}
+
+% [UNVERIFIED] Same caveat as above.
+@article{dekleer1987multiple,
+  author  = {de Kleer, Johan and Williams, Brian C.},
+  title   = {Diagnosing Multiple Faults},
+  journal = {Artificial Intelligence},
+  year    = {1987},
+  note    = {VERIFY volume/pages}
+}
+
+% [PARTIAL] Decision-theoretic troubleshooting: myopic expected-cost-optimal
+% choice of next observation/repair. URL: https://arxiv.org/pdf/1302.3563
+@article{heckerman1995troubleshooting,
+  author  = {Heckerman, David and Breese, John S. and Rommelse, Koos},
+  title   = {Decision-Theoretic Troubleshooting},
+  journal = {Communications of the ACM},
+  volume  = {38},
+  number  = {3},
+  pages   = {49--57},
+  year    = {1995}
+}
+
+
+%%% ===================================================================
+%%% Active probing / adaptive diagnosis in distributed systems
+%%% ===================================================================
+
+% [PARTIAL] THE closest prior work to adaptive minimum-cost intervention
+% selection: information-theoretic probe selection one probe at a time,
+% NP-hardness of probe-set selection, greedy approximations.
+% URL: https://dominoweb.draco.res.ibm.com/reports/rc23698.pdf
+@article{rish2005adaptive,
+  author  = {Rish, Irina and Brodie, Mark and Ma, Sheng and Odintsova, Natalia
+             and Beygelzimer, Alina and Grabarnik, Genady and Hernandez, Karina},
+  title   = {Adaptive Diagnosis in Distributed Systems},
+  journal = {IEEE Transactions on Neural Networks},
+  volume  = {16},
+  number  = {5},
+  pages   = {1088--1109},
+  year    = {2005}
+}
+
+% [PARTIAL] URL: https://cdn.aaai.org/Workshops/2002/WS-02-15/WS02-15-013.pdf
+@inproceedings{rish2002probing,
+  author    = {Rish, Irina and Brodie, Mark and Ma, Sheng},
+  title     = {Using Adaptive Probing for Real-Time Problem Diagnosis},
+  booktitle = {AAAI Workshop},
+  year      = {2002}
+}
+
+% [PARTIAL] Delta debugging as adaptive intervention search.
+% URL: https://www.st.cs.uni-saarland.de/papers/fse2002/p201-zeller.pdf
+@inproceedings{zeller2002isolating,
+  author    = {Zeller, Andreas},
+  title     = {Isolating Cause-Effect Chains from Computer Programs},
+  booktitle = {ACM SIGSOFT Symposium on the Foundations of Software Engineering (FSE)},
+  year      = {2002}
+}
+
+
+%%% ===================================================================
+%%% Interventional causal learning for fault localisation
+%%% ===================================================================
+
+% [PARTIAL] Fault localisation by actual fault injection, framed as
+% interventional causal learning.
+% URL: https://ojs.aaai.org/index.php/AAAI/article/view/26868
+@inproceedings{wang2023faultinjection,
+  author    = {Wang, Chen and Rios, Alberto and Jha, Saurabh and Shanmugam, Karthikeyan
+               and Bagehorn, Frank and Yang, Xi and Filepp, Robert
+               and Abe, Naoki and Shwartz, Larisa},
+  title     = {Fault Injection Based Interventional Causal Learning for
+               Distributed Applications},
+  booktitle = {AAAI/IAAI},
+  volume    = {37},
+  number    = {13},
+  pages     = {15738--15744},
+  year      = {2023}
+}
+
+% [PARTIAL] URL: https://saurabhjha.one/pubs/DSN2024c/paper.pdf
+@inproceedings{jha2024faultlocalization,
+  author    = {Jha, Saurabh and Rios, Alberto and Abe, Naoki
+               and Bagehorn, Frank and Shwartz, Larisa},
+  title     = {Fault Localization Using Interventional Causal Learning for
+               Cloud-Native Applications},
+  booktitle = {DSN Supplemental (DSN-S)},
+  year      = {2024}
+}
+
+% [PARTIAL] SINGLE CLOSEST PRIOR WORK overall: online causal model
+% identification via a rollout-based intervention policy, proved optimal in
+% the Bayesian sense. Bayesian-optimal, NOT frequentist anytime-valid --
+% which is the gap we may still own. Propositions 1--3 NOT yet read; fetch
+% the PDF and check them before we characterise this paper in related work.
+@article{hammar2025online,
+  author  = {Hammar, Kim and Stadler, Rolf},
+  title   = {Online Identification of {IT} Systems through Active Causal Learning},
+  journal = {arXiv preprint arXiv:2509.02130},
+  year    = {2025},
+  note    = {VERIFY Propositions 1--3}
+}
+
+
+%%% ===================================================================
+%%% Causal identifiability and interventional equivalence classes
+%%% ===================================================================
+
+% [PARTIAL] Interventional Markov equivalence classes: the formal basis for
+% "observation alone cannot identify; intervention is necessary".
+% URL: https://jmlr.org/papers/v13/hauser12a.html
+@article{hauser2012characterization,
+  author  = {Hauser, Alain and B{\"u}hlmann, Peter},
+  title   = {Characterization and Greedy Learning of Interventional Markov
+             Equivalence Classes of Directed Acyclic Graphs},
+  journal = {Journal of Machine Learning Research},
+  volume  = {13},
+  year    = {2012}
+}
+
+% [UNVERIFIED] Bounds on the number of interventions necessary and sufficient
+% for identifiability. Exact venue NOT confirmed by the sweep. RESOLVE.
+@inproceedings{eberhardt2008number,
+  author    = {Eberhardt, Frederick},
+  title     = {Almost Optimal Intervention Sets for Causal Discovery},
+  booktitle = {UNCONFIRMED VENUE},
+  year      = {2008},
+  note      = {VERIFY title and venue}
+}
+
+
+%%% ===================================================================
+%%% Root-cause attribution in causal models (observational)
+%%% ===================================================================
+
+% [PARTIAL] URL: https://proceedings.mlr.press/v162/budhathoki22a.html
+@inproceedings{budhathoki2022causal,
+  author    = {Budhathoki, Kailash and Janzing, Dominik},
+  title     = {Causal Structure-Based Root Cause Analysis of Outliers},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2022},
+  note      = {VERIFY exact title}
+}
+
+% [UNVERIFIED] Reported as arXiv:2406.05014 and/or NeurIPS 2025 -- the sweep
+% gave both and confirmed neither. RESOLVE which is the citable record.
+@article{okati2025rootcause,
+  author  = {Okati, Nastaran and others},
+  title   = {Root Cause Analysis of Outliers with Missing Structural Knowledge},
+  journal = {arXiv preprint arXiv:2406.05014},
+  year    = {2025},
+  note    = {VERIFY authors, venue, year}
+}
+
+% [PARTIAL] RCA under latent confounding via partial ancestral graphs --
+% same problem setting, observational only. Reported as arXiv:2606.20912
+% (Jun 2026); theorem text was not extractable from the PDF.
+@article{caetano2026rootcause,
+  author  = {Caetano, Anderson and Arone, Matheus and Maciel, Paulo},
+  title   = {Root Cause Analysis with Latent Confounders using
+             Partial Ancestral Graphs},
+  journal = {arXiv preprint arXiv:2606.20912},
+  year    = {2026},
+  note    = {VERIFY authors and theorem content}
+}
