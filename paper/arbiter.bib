@@ -400,17 +400,11 @@
   note    = {Layer 6. VERIFY author list -- parsing above is unreliable}
 }
 
-% [PARTIAL] e-values, SAVI, betting, AND multiple-testing/FDR, in MAS.
-% Closest on the statistics axis overall; tests deviation from equilibrium
-% benchmarks rather than blame for task failure. Must cite.
-@article{gauthier2026anytime,
-  author  = {Gauthier and Bach, Francis and Jordan, Michael I.},
-  title   = {Anytime Detection of Strategic Deviations in
-             Multi-Agent Systems},
-  journal = {arXiv preprint arXiv:2601.05427},
-  year    = {2026},
-  note    = {VERIFY first author given name}
-}
+%%% NOTE: the Gauthier/Bach/Jordan entry lived here with the description
+%%% "tests deviation from equilibrium benchmarks rather than blame for task
+%%% failure". That was WRONG -- a full-text read found Theorem 2.8, which
+%%% does give FDR over per-agent hypotheses at a data-dependent stopping
+%%% time. The corrected entry is under ADOPTED MACHINERY below.
 
 % [PARTIAL] Betting e-processes, proven anytime-validity, verdicts in
 % {none, system, judge}. Anytime-valid attribution already exists -- but
@@ -641,14 +635,15 @@
   note    = {VERIFY full author list (20 authors)}
 }
 
-% [PARTIAL] Foundational sandbagging paper, empirical.
-@article{vanderweij2024sandbagging,
-  author  = {van der Weij, Teun and others},
-  title   = {{AI} Sandbagging: Language Models can Strategically
-             Underperform on Evaluations},
-  journal = {arXiv preprint arXiv:2406.07358},
-  year    = {2024},
-  note    = {VERIFY full author list and exact title}
+% [VERIFIED venue] ICLR 2025 -- NOT arXiv-only as first recorded.
+% Foundational sandbagging paper, empirical.
+@inproceedings{vanderweij2025sandbagging,
+  author    = {van der Weij, Teun and others},
+  title     = {{AI} Sandbagging: Language Models can Strategically
+               Underperform on Evaluations},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2025},
+  note      = {arXiv:2406.07358. VERIFY full author list}
 }
 
 % [PARTIAL] Safety-case framework + collusion taxonomy incl. passive
@@ -1017,4 +1012,177 @@
   journal = {arXiv preprint arXiv:2602.07517},
   year    = {2026},
   note    = {VERIFY authors and full title}
+}
+
+
+%%% ===================================================================
+%%% VENUE-CRITICAL: AAMAS's own work. Verified against the real IFAAMAS
+%%% proceedings TOCs. No near-duplicate exists at AAMAS 2025 or 2026 --
+%%% no derivativeness risk -- but these are the citations AAMAS reviewers
+%%% will personally check for.
+%%% ===================================================================
+
+% [VERIFIED via DOI] AAMAS's OWN blame-attribution precedent. Omitting this
+% is the single citation reviewers are most likely to catch.
+@inproceedings{natan2023blame,
+  author    = {Natan, Avraham and Stern, Roni and Kalech, Meir},
+  title     = {Blame Attribution for Multi-Agent Pathfinding
+               Execution Failures},
+  booktitle = {Proc.\ of the 22nd International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  year      = {2023},
+  doi       = {10.5555/3545946.3598933},
+  note      = {Also ECAI 2023, doi 10.3233/FAIA230462}
+}
+
+% [VERIFIED via AAMAS 2026 TOC, p.753] Adaptive agent evaluation without an
+% anytime-valid guarantee. The report's note: "reviewers will expect this
+% one." Closest AAMAS work to our adaptive-probing setting.
+@inproceedings{lanctot2026active,
+  author    = {Lanctot, Marc and Larson, Kate and Gemp, Ian and Kaisers, Michael},
+  title     = {Active Evaluation of General Agents: Problem Definition and
+               Comparison of Baseline Algorithms},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  pages     = {753},
+  year      = {2026}
+}
+
+% [VERIFIED via AAMAS 2026 TOC, p.4] Strategic multi-agent oversight and
+% shutdown; game-theoretic, not statistical.
+@inproceedings{agrawal2026offswitch,
+  author    = {Agrawal, Pranav and Ebadian, Soroush and Hammond, Lewis},
+  title     = {The Multi-Agent Off-Switch Game},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  pages     = {4},
+  year      = {2026},
+  note      = {VERIFY author given names}
+}
+
+% [VERIFIED via AAMAS 2026 TOC, p.1874]
+@inproceedings{waknin2026mastitch,
+  author    = {Waknin, others},
+  title     = {{MAStitch}: Unifying Local and Global Perspectives for
+               Anomaly Detection in Multi-Agent Systems},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  pages     = {1874},
+  year      = {2026},
+  note      = {VERIFY full author list}
+}
+
+% [VERIFIED via AAMAS 2026 TOC, p.2347]
+@inproceedings{shefin2026interpretable,
+  author    = {Shefin, others and Gupta and Le and Alqahtani},
+  title     = {Interpretable Failure Analysis in Multi-Agent {RL} Systems},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  pages     = {2347},
+  year      = {2026},
+  note      = {VERIFY full author list}
+}
+
+% [VERIFIED via AAMAS 2026 TOC, p.2482]
+@inproceedings{krishna2026vibe,
+  author    = {Krishna, others and South},
+  title     = {Beyond Vibe Decision Theory: Asymmetric Manipulation
+               Vulnerabilities in {LLM} Multi-Agent Coordination},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  pages     = {2482},
+  year      = {2026},
+  note      = {VERIFY full author list}
+}
+
+% [VERIFIED via AAMAS 2026 TOC, p.1388] Accountability framing at our venue.
+@inproceedings{deshmukh2026triad,
+  author    = {Deshmukh, Jayati and Yazdanpanah, Vahid and Stein, Sebastian
+               and Ramchurn, Sarvapali D.},
+  title     = {The Triad of Identity, Trust and Responsibility in
+               Multi-Agent Systems},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  pages     = {1388},
+  year      = {2026},
+  note      = {VERIFY author given names}
+}
+
+
+%%% ===================================================================
+%%% 2026 proceedings the arXiv-only sweeps missed
+%%% ===================================================================
+
+% [VERIFIED via DOI] A NEW audit-games paper we would otherwise have missed.
+@inproceedings{liu2026initial,
+  author    = {Liu and Shen},
+  title     = {The Power of Initial Investigation in Audit Games},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2026},
+  doi       = {10.1609/AAAI.V40I20.38762},
+  note      = {VERIFY author given names}
+}
+
+% [VERIFIED via DOI]
+@article{ge2026spectrum,
+  author  = {Ge and Xie and Li and Pei and Zhang},
+  title   = {Spectrum-Based Failure Attribution for Multi-Agent Systems},
+  journal = {Proceedings of the ACM on Software Engineering},
+  year    = {2026},
+  doi     = {10.1145/3797113},
+  note    = {VERIFY author given names}
+}
+
+% [VERIFIED via DOI]
+@inproceedings{sun2026scope,
+  author    = {Sun, others},
+  title     = {Scope Delineation Before Localization},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2026},
+  doi       = {10.1609/AAAI.V40I39.40594},
+  note      = {VERIFY full author list}
+}
+
+% [VERIFIED via DOI]
+@article{wu2026intention,
+  author  = {Wu, others},
+  title   = {Intention-Behavior Consistency-Based Automated
+             Failure Attribution},
+  journal = {Expert Systems with Applications},
+  year    = {2026},
+  doi     = {10.1016/J.ESWA.2026.133044},
+  note    = {VERIFY full author list}
+}
+
+% [VERIFIED] NeurIPS 2025. Sandbagging can be exposed by noise injection --
+% relevant baseline for probing a strategically underperforming agent.
+@inproceedings{tice2025noise,
+  author    = {Tice, others},
+  title     = {Noise Injection Reveals Hidden Capabilities of
+               Sandbagging Language Models},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2025},
+  note      = {VERIFY full author list}
+}
+
+% [PARTIAL] Anytime-valid acceptance tests for self-evolving agents.
+@article{pace2026,
+  title   = {{PACE}: Anytime-Valid Acceptance Tests for
+             Self-Evolving Agents},
+  journal = {arXiv preprint arXiv:2606.08106},
+  year    = {2026},
+  note    = {VERIFY authors}
+}
+
+% [VERIFIED via direct fetch of aisi.gov.uk, 21 May 2026] MOTIVATION: a
+% government institute stating that models "recognise when they are being
+% tested and adjust their behaviour" -- and treating it as an observed
+% phenomenon with NO formal model. Exactly the gap we fill.
+@misc{aisi2026oversight,
+  author       = {{UK AI Security Institute}},
+  title        = {Will It Become Harder to Oversee {AI} Systems?},
+  howpublished = {\url{https://aisi.gov.uk}},
+  month        = {5},
+  year         = {2026},
+  note         = {VERIFY exact URL and title}
 }
