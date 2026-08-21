@@ -537,3 +537,216 @@
   year    = {2026},
   note    = {VERIFY authors and actual title}
 }
+
+
+%%% ===================================================================
+%%% Inspection games / safeguards
+%%% The classical detect-or-comply duality lives here. CONCEDE IT
+%%% EXPLICITLY in related work -- do not let a safeguards-literate
+%%% reviewer discover it for us.
+%%% ===================================================================
+
+% [VERIFIED via J-Stage DOI] THE paper to pre-empt. Strategic inspectee who
+% knows the announced randomised procedure; sequential test; type-I/type-II
+% error probabilities AND average run lengths derived FROM equilibrium
+% conditions. Owns "equilibrium-derived sequential error control against a
+% probe-aware inspectee" as of 1992. Our distinction is anytime-validity
+% (horizon-free, no ARL calibration) plus the cumulative-harm bound.
+@article{avenhaus1992statistical,
+  author  = {Avenhaus, Rudolf and Okada, Akira},
+  title   = {Statistical Criteria for Sequential Inspector-Leadership Games},
+  journal = {Journal of the Operations Research Society of Japan},
+  volume  = {35},
+  number  = {2},
+  pages   = {134--151},
+  year    = {1992},
+  doi     = {10.15807/jorsj.35.134}
+}
+
+% [PARTIAL] Sequential/multi-stage inspection with limited inspections;
+% equilibrium recursion. No sequential statistical testing.
+@article{vonstengel2014recursive,
+  author  = {von Stengel, Bernhard},
+  title   = {Recursive Inspection Games},
+  journal = {arXiv preprint arXiv:1412.0129},
+  year    = {2014}
+}
+
+% [PARTIAL] Detection-error-driven deterrence equilibrium; nearest thing to
+% the second branch of our dichotomy, but no sequential test.
+@article{baliga2020deterrence,
+  author  = {Baliga, Sandeep and Bueno de Mesquita, Ethan and Wolitzky, Alexander},
+  title   = {Deterrence with Imperfect Attribution},
+  journal = {American Political Science Review},
+  year    = {2020},
+  doi     = {10.1017/s0003055420000362}
+}
+
+% [PARTIAL] Randomised audit budget vs. strategic violator; equilibrium loss
+% bounds, no statistical test guarantee.
+@article{yan2019database,
+  author  = {Yan, Chao and Li, Bo and Vorobeychik, Yevgeniy and Laszka, Aron
+             and Fabbri, Daniel and Malin, Bradley},
+  title   = {Database Audit Workload Prioritization via Game Theory},
+  journal = {ACM Transactions on Privacy and Security},
+  year    = {2019},
+  doi     = {10.1145/3323924}
+}
+
+% [PARTIAL] Strategically timed attack onset in quickest detection.
+@article{gupta2020quickest,
+  author  = {Gupta, Arunava and Sikdar, Sourav and Chattopadhyay, Arpan},
+  title   = {Quickest Bayesian and Non-Bayesian Detection of False Data
+             Injection Attack in Remote State Estimation},
+  journal = {arXiv preprint arXiv:2010.15785},
+  year    = {2020},
+  note    = {VERIFY author list}
+}
+
+
+%%% ===================================================================
+%%% AI control -- OWNS THE THREAT MODEL. Cite, do not claim.
+%%% ===================================================================
+
+% [VERIFIED] The only formal AI-control paper found: red-teaming as a
+% multi-objective partially observable stochastic game, Pareto-optimal
+% protocol synthesis. Critically: does NOT model an agent that detects it is
+% being probed, and gives no anytime-valid or finite-sample statistical
+% guarantee. This is the precise boundary of our contribution.
+@article{griffin2024games,
+  author  = {Griffin, Charlie and Thomson, Louis and Shlegeris, Buck
+             and Abate, Alessandro},
+  title   = {Games for {AI} Control},
+  journal = {arXiv preprint arXiv:2409.07985},
+  year    = {2024},
+  note    = {v2 May 2026}
+}
+
+% [VERIFIED] ICML 2024. Empirical safety/usefulness curves, no theorems.
+@inproceedings{greenblatt2024aicontrol,
+  author    = {Greenblatt, Ryan and Shlegeris, Buck and Sachan, Kshitij
+               and Roger, Fabien},
+  title     = {{AI} Control: Improving Safety Despite Intentional Subversion},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2024},
+  note      = {arXiv:2312.06942}
+}
+
+% [VERIFIED] Demonstration, not detection theory. 20 authors -- fill in.
+@article{greenblatt2024alignmentfaking,
+  author  = {Greenblatt, Ryan and others},
+  title   = {Alignment Faking in Large Language Models},
+  journal = {arXiv preprint arXiv:2412.14093},
+  year    = {2024},
+  note    = {VERIFY full author list (20 authors)}
+}
+
+% [PARTIAL] Foundational sandbagging paper, empirical.
+@article{vanderweij2024sandbagging,
+  author  = {van der Weij, Teun and others},
+  title   = {{AI} Sandbagging: Language Models can Strategically
+             Underperform on Evaluations},
+  journal = {arXiv preprint arXiv:2406.07358},
+  year    = {2024},
+  note    = {VERIFY full author list and exact title}
+}
+
+% [PARTIAL] Safety-case framework + collusion taxonomy incl. passive
+% self-recognition. Framework, not theorems.
+@article{gardnerchallis2026untrusted,
+  author  = {Gardner-Challis, others},
+  title   = {When Can We Trust Untrusted Monitoring? A Safety Case Sketch
+             Across Collusion Strategies},
+  journal = {arXiv preprint arXiv:2602.20628},
+  year    = {2026},
+  note    = {VERIFY full author list}
+}
+
+% [PARTIAL] AI Control Levels framework.
+@article{korbak2025evaluate,
+  author  = {Korbak, Tomek and Balesni, Mikita and Shlegeris, Buck
+             and Irving, Geoffrey},
+  title   = {How to Evaluate Control Measures for {LLM} Agents?},
+  journal = {arXiv preprint arXiv:2504.05259},
+  year    = {2025}
+}
+
+
+%%% ===================================================================
+%%% Evaluation awareness / probe detection
+%%% Measures the phenomenon; nobody attaches a guarantee to it.
+%%% ===================================================================
+
+% [VERIFIED] NEAREST NEIGHBOUR overall. Replays real deployment trajectories
+% to build evaluations "substantially less distinguishable from deployment",
+% and measures distinguishability via verbalized eval-awareness + judge
+% probability. Empirical precursor to our distinguishability parameter:
+% no theorem, no bound, no validity claim. Cite as such.
+@article{ivanov2026lure,
+  author  = {Ivanov, Igor and Africa, David Demitri},
+  title   = {{LURE}: Live-Usage Replay Evaluations for Reducing
+             Evaluation Awareness},
+  journal = {arXiv preprint arXiv:2605.26438},
+  year    = {2026}
+}
+
+% [PARTIAL] Splits eval-awareness into environment recognizability vs.
+% response propensity -- conceptually close to our distinguishability
+% parameter's decomposition.
+@article{li2026decomposing,
+  author  = {Li and Zhang and Zhang and Jin and Abdelnabi, Sahar
+             and Andriushchenko, Maksym},
+  title   = {Decomposing and Measuring Evaluation Awareness},
+  journal = {arXiv preprint arXiv:2605.23055},
+  year    = {2026},
+  note    = {VERIFY author list -- parsing above is unreliable}
+}
+
+% [PARTIAL] Honeypot evaluations for scheming propensity (GDM). Empirical.
+@article{krakovna2026honeypot,
+  author  = {Krakovna, Victoria and Lindner, David and Ho, Anson
+             and Farquhar, Sebastian and Shah, Rohin},
+  title   = {Realistic Honeypot Evaluations for Scheming Propensity},
+  journal = {arXiv preprint arXiv:2605.29729},
+  year    = {2026},
+  note    = {VERIFY author list}
+}
+
+% [PARTIAL] Formalises eval-vs-deployment behavioural divergence.
+@article{ferrara2026defeatdevices,
+  author  = {Ferrara, Emilio},
+  title   = {Defeat Devices in {AI} Systems},
+  journal = {arXiv preprint arXiv:2606.28863},
+  year    = {2026},
+  note    = {VERIFY author}
+}
+
+% [PARTIAL] Probes context-dependent defection.
+@article{hasan2026honeypot,
+  author  = {Hasan, others},
+  title   = {Honeypot Protocol},
+  journal = {arXiv preprint arXiv:2604.13301},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] Formalises defence collapse as groups become indistinguishable
+% -- different problem, but the only bound-degrades-with-indistinguishability
+% result surfaced. Cite as adjacent to our epsilon-parameterised guarantee.
+@article{sun2026decomposition,
+  author  = {Sun, others},
+  title   = {{LLM} Service Decomposition Attacks},
+  journal = {arXiv preprint arXiv:2608.17445},
+  year    = {2026},
+  note    = {VERIFY authors and exact title}
+}
+
+% [PARTIAL] Anytime-valid LLM evaluation anchor; assumes a non-strategic
+% system, which is exactly the assumption we drop.
+@article{hsu2026efficient,
+  author  = {Hsu and Shekhar, Shubhanshu},
+  title   = {Efficient Sequential Evaluation of {LLMs}},
+  journal = {arXiv preprint arXiv:2607.17409},
+  year    = {2026},
+  note    = {VERIFY author list}
+}
