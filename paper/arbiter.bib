@@ -234,3 +234,306 @@
   year    = {2026},
   note    = {VERIFY authors and theorem content}
 }
+
+
+%%% ===================================================================
+%%% DO NOT CITE -- fabrications to guard against
+%%%
+%%% These two were asserted from memory early in this project and the
+%%% 2026-08-21 sweep could not find either after repeated search. They do
+%%% not appear to exist. Recorded here so they never creep back in:
+%%%
+%%%   "TRAJDEBUG"          -- no such paper. Probably a confabulation of
+%%%                           AgentDebug (arXiv:2509.25370) or AgentDebugX.
+%%%   "Before Agents Speak" -- NOT FOUND. Do not cite under any framing.
+%%%
+%%% Also corrected from that same early list:
+%%%   TAMAS is an ICML 2025 MAS *Workshop* paper, not main conference.
+%%%   SHE is "Trajectory-driven Safety Harness Evolution" -- NOT an
+%%%     attribution method; do not cite it as one.
+%%%   ACIArena is cascading-injection robustness, not attribution.
+%%%   MASPrism is the correct spelling (not MASPRISM).
+%%% ===================================================================
+
+
+%%% ===================================================================
+%%% Interventional / counterfactual attribution in LLM MAS
+%%% THE PRIMARY THREAT SURFACE. Counterfactual replay is described in this
+%%% literature as standard practice by mid-2026. All arXiv IDs confirmed
+%%% by the sweep; author lists still need filling in from the records.
+%%% ===================================================================
+
+% [PARTIAL] MOST THREATENING SINGLE PAPER: hypothesis generation + "active
+% verification through targeted interventions" (editing messages, altering
+% plans), evaluated on GAIA/AssistantBench with Magentic-One.
+@article{ma2025dover,
+  author  = {Ma, others},
+  title   = {{DoVer}: Intervention-Driven Auto Debugging for
+             {LLM} Multi-Agent Systems},
+  journal = {arXiv preprint arXiv:2512.06749},
+  year    = {2025},
+  note    = {MSR. VERIFY full author list}
+}
+
+% [PARTIAL] Localises takeover points via controlled counterfactual
+% re-executions at tool-return boundaries + causally guided context
+% purification. Pre-empts the sanitised-context idea almost exactly.
+@article{agentsentry2026,
+  title   = {{AgentSentry}},
+  journal = {arXiv preprint arXiv:2602.22724},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] SCM + do() on a step + re-execution under the same stochastic
+% policy; explicit intervention algebra; Monte-Carlo Shapley credit
+% splitting; confidence intervals on all effects.
+@article{shah2026car,
+  author  = {Shah, others},
+  title   = {Causal Agent Replay},
+  journal = {arXiv preprint arXiv:2606.08275},
+  year    = {2026},
+  note    = {VERIFY full author list}
+}
+
+% [PARTIAL] Step-level counterfactual intervention with downstream
+% re-execution; Causal Responsibility Scores.
+@article{causalflow2026,
+  title   = {{CausalFlow}},
+  journal = {arXiv preprint arXiv:2605.25338},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] Controlled replay with a diagnosis-specific patch; uses the
+% verified outcome flip as contrastive evidence.
+@article{reflect2026,
+  title   = {{REFLECT}},
+  journal = {arXiv preprint arXiv:2606.09071},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] Counterfactual replay + programmed fault injection.
+@article{agentracer2025,
+  title   = {{AgenTracer}},
+  journal = {arXiv preprint arXiv:2509.03312},
+  year    = {2025},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] FSE 2026. Trajectory replay + repeated MAS re-execution +
+% spectrum analysis. This is resampling-on-fixed-inputs, already done --
+% it kills the "on-demand resampling is our edge" argument.
+@inproceedings{famas2026,
+  title     = {{FAMAS}},
+  booktitle = {ACM International Conference on the Foundations of
+               Software Engineering (FSE)},
+  year      = {2026},
+  note      = {arXiv:2509.13782. VERIFY authors and full title}
+}
+
+% [PARTIAL] Leave-one-out agent ablation + Shapley; shows ablation beats
+% LLM introspection.
+@article{agentsthatmatter2026,
+  title   = {Agents that Matter},
+  journal = {arXiv preprint arXiv:2605.27621},
+  year    = {2026},
+  note    = {VERIFY authors}
+}
+
+% [PARTIAL] Argues counterfactual replay is too expensive and avoids it --
+% and in doing so calls replay "the standard tool", which is precisely the
+% quote that sinks a novelty claim built on replay.
+@article{kang2026zeroreplay,
+  author  = {Kang, others},
+  title   = {Knowledge-Based Zero-Replay Debugging of Multi-Agent
+             {LLM} Traces},
+  journal = {arXiv preprint arXiv:2606.14805},
+  year    = {2026},
+  note    = {VERIFY full author list}
+}
+
+% [PARTIAL] NAME COLLISION + conceptual overlap: a monitor that, under an
+% inspection budget, chooses to wait, question a participant, or inspect
+% reasoning traces. Forces a rename of this project.
+@article{arbiteragent2026,
+  title   = {The Arbiter Agent},
+  journal = {arXiv preprint arXiv:2606.10747},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] Detect -> Attribute -> Recover -> Rerun loop.
+@article{agentdebugx2026,
+  title   = {{AgentDebugX}},
+  journal = {arXiv preprint arXiv:2607.18754},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] Counterfactual memory-influence scoring for poisoned shared
+% memory -- directly relevant to the latent-shared-context story.
+@article{memaudit2026,
+  title   = {{MemAudit}},
+  journal = {arXiv preprint arXiv:2605.23723},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+
+%%% ===================================================================
+%%% Statistical guarantees for LLM / agent monitoring
+%%% This is where the surviving wedge lives.
+%%% ===================================================================
+
+% [PARTIAL] CLOSEST WORK on the statistics axis for attribution:
+% finite-sample distribution-free coverage for MAS error attribution +
+% rollback. Limits verified by the sweep and they are our wedge:
+% observational scores only, exchangeability w/ fixed calibration set,
+% MARGINAL coverage explicitly not FDR, and NOT anytime-valid.
+@article{feng2026conformal,
+  author  = {Feng, Sui and Hou and Wu and Cresswell},
+  title   = {Conformal Agent Error Attribution},
+  journal = {arXiv preprint arXiv:2605.06788},
+  year    = {2026},
+  note    = {Layer 6. VERIFY author list -- parsing above is unreliable}
+}
+
+% [PARTIAL] e-values, SAVI, betting, AND multiple-testing/FDR, in MAS.
+% Closest on the statistics axis overall; tests deviation from equilibrium
+% benchmarks rather than blame for task failure. Must cite.
+@article{gauthier2026anytime,
+  author  = {Gauthier and Bach, Francis and Jordan, Michael I.},
+  title   = {Anytime Detection of Strategic Deviations in
+             Multi-Agent Systems},
+  journal = {arXiv preprint arXiv:2601.05427},
+  year    = {2026},
+  note    = {VERIFY first author given name}
+}
+
+% [PARTIAL] Betting e-processes, proven anytime-validity, verdicts in
+% {none, system, judge}. Anytime-valid attribution already exists -- but
+% two-way and non-interventional.
+@article{whodrifted2026,
+  title   = {Who Drifted: the System or the Judge?},
+  journal = {arXiv preprint arXiv:2606.15474},
+  year    = {2026},
+  note    = {VERIFY authors}
+}
+
+% [PARTIAL] SAVI / e-processes / testing-by-betting for AI audits.
+@article{feng2026auditing,
+  author  = {Feng, others},
+  title   = {Adaptive Auditing of {AI} Systems with
+             Anytime-Valid Guarantees},
+  journal = {arXiv preprint arXiv:2605.07002},
+  year    = {2026},
+  note    = {VERIFY full author list}
+}
+
+% [PARTIAL] Anytime-valid FDR under optional stopping -- the multiplicity
+% machinery we build on.
+@article{wang2025stoppedebh,
+  author  = {Wang, Ziyu and Dandapanthula, Sanjit and Ramdas, Aaditya},
+  title   = {Stopped e-{BH}: Anytime-Valid {FDR} Control},
+  journal = {arXiv preprint arXiv:2502.08539},
+  year    = {2025},
+  note    = {VERIFY exact title and author list}
+}
+
+% [PARTIAL] arXiv:2606.20820
+@article{celeus2026,
+  title   = {{CELEUS}},
+  journal = {arXiv preprint arXiv:2606.20820},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] arXiv:2605.20270
+@article{conformalselective2026,
+  title   = {Conformal Selective Acting},
+  journal = {arXiv preprint arXiv:2605.20270},
+  year    = {2026},
+  note    = {VERIFY authors}
+}
+
+
+%%% ===================================================================
+%%% Benchmarks and observational attribution baselines
+%%% ===================================================================
+
+% [PARTIAL] ICML 2025 Spotlight.
+@inproceedings{whoandwhen2025,
+  title     = {Which Agent Causes Task Failures and When?},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2025},
+  note      = {Who\&When. arXiv:2505.00212. VERIFY title and authors}
+}
+
+@article{whoandwhenpro2026,
+  title   = {Who\&When Pro},
+  journal = {arXiv preprint arXiv:2607.09996},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+@article{trail2025,
+  title   = {{TRAIL}},
+  journal = {arXiv preprint arXiv:2505.08638},
+  year    = {2025},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] ACL 2026 Long, pp. 19888--19905. Correct system name is
+% TraceElephant; "Seeing the Whole Elephant" is the paper title.
+@inproceedings{traceelephant2026,
+  title     = {Seeing the Whole Elephant},
+  booktitle = {Annual Meeting of the Association for Computational
+               Linguistics (ACL)},
+  pages     = {19888--19905},
+  year      = {2026},
+  note      = {arXiv:2604.22708. VERIFY authors and full title}
+}
+
+% [PARTIAL] Multiple plausible attributions per failure -- this MOTIVATES
+% the FDR framing. Useful to us rather than threatening.
+@article{mpbench2026,
+  title   = {{MP-Bench}},
+  journal = {arXiv preprint arXiv:2603.25001},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] AAMAS 2026, ACM DOI 10.65109/PNWL9707. Venue-relevant.
+@inproceedings{lumimas2026,
+  title     = {{LumiMAS}},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  year      = {2026},
+  note      = {arXiv:2508.12412. VERIFY authors and full title}
+}
+
+% [PARTIAL] Labelled "causal" but observational (transfer entropy / graph
+% screening). Useful contrast.
+@article{caspian2026,
+  title   = {{CASPIAN}},
+  journal = {arXiv preprint arXiv:2605.19240},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+@article{chief2026,
+  title   = {{CHIEF}},
+  journal = {arXiv preprint arXiv:2602.23701},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
+
+% [PARTIAL] Survey of the area.
+@article{massurvey2026,
+  title   = {Survey of {LLM} Multi-Agent Failure Attribution},
+  journal = {arXiv preprint arXiv:2605.14892},
+  year    = {2026},
+  note    = {VERIFY authors and actual title}
+}
