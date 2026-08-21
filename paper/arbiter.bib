@@ -750,3 +750,271 @@
   year    = {2026},
   note    = {VERIFY author list}
 }
+
+
+%%% ===================================================================
+%%% ADOPTED MACHINERY -- cite as the tools we build on, never as our
+%%% contribution. Anytime-validity and FDR-over-agents are BOTH already
+%%% published together; see gauthier2026anytime Theorem 2.8.
+%%% ===================================================================
+
+% [VERIFIED from HTML full text, v3 2026-05-22] SUPERSEDES the earlier, too
+% shallow reading of this paper. THEOREM 2.8 gives e-BH FDR control,
+% FDR := E[|R cap H_0| / (1 v |R|)] <= alpha, AT A DATA-DEPENDENT STOPPING
+% TIME, over a hypothesis family indexed by PLAYER-DEVIATION PAIRS. That is
+% per-agent blame attribution with anytime-valid FDR control, in a
+% multi-agent setting, as of Jan 2026.
+%
+% Therefore: we must NOT claim anytime-validity or FDR-over-agents as novel.
+% What it does NOT have (verified absent): any inspection game, inspection
+% rate or monitoring budget, cumulative-harm bound, or model of an agent
+% that knows it is being tested and adapts. That absence is our contribution.
+% Code: github.com/GauthierE/anytime-detection-deviation. Venue UNVERIFIED.
+@article{gauthier2026anytime,
+  author  = {Gauthier and Bach, Francis and Jordan, Michael I.},
+  title   = {Anytime Detection of Strategic Deviations in
+             Multi-Agent Systems},
+  journal = {arXiv preprint arXiv:2601.05427},
+  year    = {2026},
+  note    = {v3. Cite prominently and distinguish explicitly.
+             VERIFY first author given name and venue}
+}
+
+% [PARTIAL] Anytime-valid testing of whether observed play matches a
+% committed mixed profile under imperfect monitoring; folk-theorem results.
+% Couples equilibrium analysis to a sequential test -- but single-tester,
+% no FDR, no harm-vs-inspection-rate bound.
+@article{capitaine2026testthenpunish,
+  author  = {Capitaine, Adrienne and Scheid, Antoine and Boursier, Etienne
+             and Durmus, Alain and Jordan, Michael I.},
+  title   = {Test-then-Punish: A Statistical Approach to Repeated Games},
+  journal = {arXiv preprint arXiv:2603.05619},
+  year    = {2026},
+  note    = {VERIFY author given names}
+}
+
+% [PARTIAL] e-values / testing-by-betting foundations.
+@article{ramdas2022evalues,
+  author  = {Ramdas, Aaditya and Gr{\"u}nwald, Peter and Vovk, Vladimir
+             and Shafer, Glenn},
+  title   = {Game-Theoretic Statistics and Safe Anytime-Valid Inference},
+  journal = {arXiv preprint arXiv:2210.01948},
+  year    = {2022},
+  note    = {VERIFY exact title}
+}
+
+% [PARTIAL] Betting-based auditing; adjacent non-game application.
+@article{chugg2023auditing,
+  author  = {Chugg, Ben and Cortes-Gomez, Santiago and Wilder, Bryan
+             and Ramdas, Aaditya},
+  title   = {Auditing Fairness by Betting},
+  journal = {arXiv preprint arXiv:2305.17570},
+  year    = {2023}
+}
+
+
+%%% ===================================================================
+%%% Inspection games -- the safeguards tradition. VERIFIED that it never
+%%% reached horizon-free guarantees (all fixed-horizon or ARL) and never
+%%% did multiplicity correction across inspectees. Both checks favour us,
+%%% but are largely moot given gauthier2026anytime.
+%%% ===================================================================
+
+% [PARTIAL] Handbook chapter -- the canonical survey.
+@incollection{avenhaus2002inspection,
+  author    = {Avenhaus, Rudolf and von Stengel, Bernhard and Zamir, Shmuel},
+  title     = {Inspection Games},
+  booktitle = {Handbook of Game Theory with Economic Applications},
+  chapter   = {51},
+  year      = {2002},
+  doi       = {10.1016/s1574-0005(02)03014-x}
+}
+
+% [PARTIAL] doi verified via Crossref.
+@article{avenhaus2005playing,
+  author  = {Avenhaus, Rudolf and Canty, Morton J.},
+  title   = {Playing for Time: A Sequential Inspection Game},
+  journal = {European Journal of Operational Research},
+  volume  = {167},
+  number  = {2},
+  pages   = {475--492},
+  year    = {2005},
+  doi     = {10.1016/j.ejor.2004.01.045}
+}
+
+% [UNVERIFIED CONTENT -- READ BEFORE SUBMISSION] Metadata verified only. The
+% title implies a sequential sampling procedure embedded in an inspection
+% game, which is the likeliest place the safeguards tradition brushes our
+% surviving claim. Highest-priority paper to read.
+@article{canty2001sequential,
+  author  = {Canty, Morton J. and Rothenstein, Daniel and Avenhaus, Rudolf},
+  title   = {A Sequential Attribute Sampling Inspection Game for
+             Item Facilities},
+  journal = {Naval Research Logistics},
+  year    = {2001},
+  doi     = {10.1002/nav.1031},
+  note    = {CONTENT UNVERIFIED -- read this}
+}
+
+% [PARTIAL] CLOSEST STRUCTURAL ANALOGUE to our harm bound: inspector
+% allocates a limited inspection budget over periods against a violator with
+% per-period rewards, yielding recursive value bounds on ACCUMULATED ILLEGAL
+% GAIN. Equilibrium-value result, not an error-controlled-test-or-harm-bound
+% disjunction. Distinguish carefully. Supersedes the arXiv-only entry above.
+@article{vonstengel2016recursive,
+  author  = {von Stengel, Bernhard},
+  title   = {Recursive Inspection Games},
+  journal = {Mathematics of Operations Research},
+  volume  = {41},
+  number  = {3},
+  pages   = {935--952},
+  year    = {2016},
+  doi     = {10.1287/moor.2015.0762},
+  note    = {arXiv:1412.0129}
+}
+
+% [PARTIAL] Imperfect inspection over time.
+@article{rothenstein2002imperfect,
+  author  = {Rothenstein, Daniel and Zamir, Shmuel},
+  title   = {Imperfect Inspection Games Over Time},
+  journal = {Annals of Operations Research},
+  volume  = {109},
+  pages   = {175--192},
+  year    = {2002},
+  doi     = {10.1023/A:1016352202713}
+}
+
+% [PARTIAL] Multiple inspectees -- but equilibrium-theoretic, NO multiplicity
+% correction. Supports our claim that the tradition never did FDR.
+@article{hohzaki2007inspection,
+  author  = {Hohzaki, Ryusuke},
+  title   = {An Inspection Game with Multiple Inspectees},
+  journal = {European Journal of Operational Research},
+  volume  = {178},
+  number  = {3},
+  pages   = {894--906},
+  year    = {2007},
+  doi     = {10.1016/j.ejor.2006.02.015}
+}
+
+@article{deutsch2016multiple,
+  author  = {Deutsch, Yael and Golany, Boaz},
+  title   = {Multiple Agents Finitely Repeated Inspection Game
+             with Dismissals},
+  journal = {Annals of Operations Research},
+  volume  = {237},
+  pages   = {7--26},
+  year    = {2016},
+  doi     = {10.1007/s10479-014-1703-6}
+}
+
+% [PARTIAL] EC 2025. Imperfect detection, defender positioning; equilibrium
+% only, no statistical test.
+@inproceedings{bahamondes2025inspection,
+  author    = {Bahamondes, Bastian and Dahan, Mathieu},
+  title     = {Inspection Game with Location-Specific
+               Detection Capabilities},
+  booktitle = {ACM Conference on Economics and Computation (EC)},
+  year      = {2025},
+  doi       = {10.1145/3736252.3742620},
+  note      = {arXiv:2404.11545}
+}
+
+
+%%% ===================================================================
+%%% Audit games -- VERIFIED: one-shot Stackelberg computation. Deterrence
+%%% appears only as equilibrium utility. No finite-sample detection
+%%% guarantee, no cumulative-harm-over-time bound, no dichotomy.
+%%% ===================================================================
+
+% [PARTIAL] IJCAI 2013.
+@inproceedings{blocki2013audit,
+  author    = {Blocki, Jeremiah and Christin, Nicolas and Datta, Anupam
+               and Procaccia, Ariel D. and Sinha, Arunesh},
+  title     = {Audit Games},
+  booktitle = {International Joint Conference on Artificial
+               Intelligence (IJCAI)},
+  year      = {2013},
+  note      = {arXiv:1303.0356}
+}
+
+% [PARTIAL] AAAI 2015.
+@inproceedings{blocki2015audit,
+  author    = {Blocki, Jeremiah and Christin, Nicolas and Datta, Anupam
+               and Procaccia, Ariel D. and Sinha, Arunesh},
+  title     = {Audit Games with Multiple Defender Resources},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2015},
+  doi       = {10.1609/aaai.v29i1.9317},
+  note      = {arXiv:1409.4503}
+}
+
+% [UNVERIFIED] GameSec 2013; DBLP was down so this was never reached.
+@inproceedings{blocki2013bounded,
+  author    = {Blocki, Jeremiah and others},
+  title     = {Adaptive Regret Minimization in Bounded-Memory Games},
+  booktitle = {GameSec},
+  year      = {2013},
+  note      = {UNVERIFIED -- confirm before citing}
+}
+
+% [PARTIAL] A finite run of audit silence pushes every sequential
+% equilibrium into violation. Equilibrium-value, not a tested dichotomy.
+@article{lukyanov2025audit,
+  author  = {Lukyanov, Georgy},
+  title   = {Audit Silence and the Capacity Trap},
+  journal = {arXiv preprint arXiv:2509.04035},
+  year    = {2025}
+}
+
+
+%%% ===================================================================
+%%% Strategic classification -- VERIFIED: randomisation is studied for
+%%% fairness and mistake bounds, never for detection. Nobody bounds
+%%% manipulation gain against an inspection probability alongside a test.
+%%% ===================================================================
+
+@article{braverman2020randomness,
+  author  = {Braverman, Mark and Garg, Sumegha},
+  title   = {The Role of Randomness and Noise in Strategic Classification},
+  journal = {arXiv preprint},
+  year    = {2020},
+  note    = {VERIFY arXiv id}
+}
+
+@article{hutton2026randomized,
+  author  = {Hutton and Melrod and Shao},
+  title   = {On Randomized Algorithms in Online Strategic Classification},
+  journal = {arXiv preprint},
+  year    = {2026},
+  note    = {VERIFY arXiv id and author given names}
+}
+
+
+%%% ===================================================================
+%%% Probe-distinguishability -- the epsilon parameter. VERIFIED that only
+%%% empirical work exists; nobody has a theorem. Strongest novelty claim.
+%%% ===================================================================
+
+% [PARTIAL] MOTIVATION GOLD: measures how well frontier models notice a
+% control intervention -- "low to moderate, up to 0.87". Empirical evidence
+% that epsilon > 0 in practice, i.e. our parameter is not hypothetical.
+@article{schaeffer2026ciaware,
+  author  = {Schaeffer, Rylan and Jiralerspong, Marco and Panfilov and
+             Lajoie, Guillaume and Geiping, Jonas and Bengio, Yoshua
+             and Zimmermann, Roland S.},
+  title   = {{CIAware-Bench}: Benchmarking Control Intervention Awareness
+             Across Frontier {LLMs}},
+  journal = {arXiv preprint arXiv:2606.11063},
+  year    = {2026},
+  note    = {VERIFY author list and given names}
+}
+
+% [PARTIAL] Trap documents + statistical testing; flags learnable trap
+% features as a weakness -- i.e. an adversary can learn to spot the probe.
+@article{mempot2026,
+  title   = {{MemPot}},
+  journal = {arXiv preprint arXiv:2602.07517},
+  year    = {2026},
+  note    = {VERIFY authors and full title}
+}
