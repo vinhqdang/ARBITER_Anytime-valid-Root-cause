@@ -90,7 +90,7 @@ def _leaky_comparison(
 ) -> None:
     """Target on the VISIBLE axis: powerful against a naive agent, and
     exploitable by a strategic one."""
-    from monitor.policy import allocate, optimal_evasion_horizon
+    from monitor.policy import allocate
 
     visible_priority = priority.mean(axis=1)
     for eps in (0.5, 0.9):

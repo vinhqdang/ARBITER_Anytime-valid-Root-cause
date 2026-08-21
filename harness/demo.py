@@ -3,12 +3,12 @@
 import sys
 from pathlib import Path
 
+from .llm_client import LLMClient
+from .mas import Fault, build_topology, replay_agent, run_trajectory
+
 # Model output contains non-cp1252 characters (arrows, dashes); the default
 # Windows console encoding raises on them mid-print.
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-
-from .llm_client import LLMClient
-from .mas import Fault, build_topology, replay_agent, run_trajectory
 
 CLEAN_CONTEXT = "Reference: the project deadline is 8 October and the budget is $40,000."
 POISONED_CONTEXT = "Reference: the project deadline is 8 December and the budget is $40,000."

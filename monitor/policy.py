@@ -230,7 +230,6 @@ def optimal_evasion_horizon(
 
     which is what the experiment checks.
     """
-    from .eprocess import kl_bernoulli
 
     if pi_min <= 0:
         # A never-audited context: defect there freely, forever.

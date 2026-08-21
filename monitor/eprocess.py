@@ -17,7 +17,7 @@ where the factor is 1 - lam*pi_0 and must stay positive.
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 # Below this, treat a rate as exactly the boundary to avoid divide-by-zero
 # in the GRO wager and in KL.

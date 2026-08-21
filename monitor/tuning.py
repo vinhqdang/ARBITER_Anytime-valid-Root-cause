@@ -26,7 +26,6 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 
-import numpy as np
 
 from .eprocess import kl_bernoulli
 from .policy import audited_flag_rate, optimal_evasion_horizon
