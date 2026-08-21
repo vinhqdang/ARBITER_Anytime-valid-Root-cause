@@ -243,33 +243,32 @@ def optimal_evasion_horizon(
             harm=harm_per_defection * thin_fraction * horizon,
         )
 
-    best: HorizonEvasion | None = None
-    for step in range(1, grid + 1):
-        q = thin_fraction * step / grid
-        q_audit = min(1.0, q * pi_min / audit_rate)
-        flag_rate = audited_flag_rate(q_audit, pi_0, beta)
+    # Vectorised: the scalar loop was ~20k Python iterations per call, which
+    # made the leakage-tuning sweep (a call per grid point per weight)
+    # intractable.
+    q = thin_fraction * np.arange(1, grid + 1, dtype=float) / grid
+    q_audit = np.minimum(1.0, q * pi_min / audit_rate)
+    flag_rate = q_audit * (1.0 - beta) + (1.0 - q_audit) * pi_0
 
-        if flag_rate <= pi_0 + 1e-15:
-            rounds = float("inf")
-        else:
-            audits = math.log(1.0 / alpha) / kl_bernoulli(flag_rate, pi_0)
-            rounds = audits / audit_rate
+    detectable = flag_rate > pi_0 + 1e-15
+    rounds = np.full(grid, np.inf)
+    if np.any(detectable):
+        fr = np.clip(flag_rate[detectable], 1e-12, 1.0 - 1e-12)
+        p0 = min(max(pi_0, 1e-12), 1.0 - 1e-12)
+        kl = fr * np.log(fr / p0) + (1.0 - fr) * np.log((1.0 - fr) / (1.0 - p0))
+        rounds[detectable] = math.log(1.0 / alpha) / kl / audit_rate
 
-        effective = min(rounds, horizon)
-        harm = harm_per_defection * q * effective
-        candidate = HorizonEvasion(
-            q_deploy=q,
-            q_audit=q_audit,
-            flag_rate=flag_rate,
-            rounds_to_detect=rounds,
-            detected_within_horizon=rounds <= horizon,
-            harm=harm,
-        )
-        if best is None or candidate.harm > best.harm:
-            best = candidate
+    harm = harm_per_defection * q * np.minimum(rounds, horizon)
+    best_i = int(np.argmax(harm))
 
-    assert best is not None
-    return best
+    return HorizonEvasion(
+        q_deploy=float(q[best_i]),
+        q_audit=float(q_audit[best_i]),
+        flag_rate=float(flag_rate[best_i]),
+        rounds_to_detect=float(rounds[best_i]),
+        detected_within_horizon=bool(rounds[best_i] <= horizon),
+        harm=float(harm[best_i]),
+    )
 
 
 @dataclass(frozen=True)

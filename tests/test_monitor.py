@@ -233,6 +233,72 @@ def test_scaling_law_exponents() -> None:
     assert exponent([1 / p for p in rates], rate_harms) == pytest.approx(0.5, abs=0.03)
 
 
+def test_conditional_uniformity_gives_unbiased_audit() -> None:
+    """CENTRAL THEOREM. If E_m[pi | o_a] is constant, the audited defection
+    rate equals the deployment rate exactly -- for ANY targeting along the
+    monitor-private axis, and regardless of the adversary's visible policy.
+
+    The adversary's defection cannot depend on variables it does not observe,
+    so it is constant along the private axis and the monitor's targeting
+    there integrates out. This is why monitor-private information confers no
+    advantage: conditional uniformity is not merely sufficient, it is all
+    there is.
+    """
+    from monitor.private import (
+        allocate_private,
+        detection_rate,
+        strategic_best_response,
+    )
+
+    rng = np.random.default_rng(3)
+    n_vis, n_priv, rate, pi_0, beta = 12, 8, 0.1, 0.05, 0.1
+    visible = np.full(n_vis, 1.0 / n_vis)
+    private = np.full((n_vis, n_priv), 1.0 / n_priv)
+    priority = rng.random((n_vis, n_priv))
+
+    rates = []
+    for aggressiveness in (0.0, 0.25, 0.5, 0.75, 1.0):
+        alloc = allocate_private(priority, visible, private, rate, aggressiveness)
+        # Conditional uniformity must hold at every aggressiveness.
+        assert np.allclose(alloc.agent_inferable, rate, atol=1e-9)
+        assert alloc.leakage == pytest.approx(0.0, abs=1e-9)
+
+        policy = strategic_best_response(alloc, pi_0, beta, target_deploy=0.1)
+        flag_rate, q_deploy = detection_rate(alloc, policy, beta, pi_0)
+        # Invert the flag rate to recover the audited defection rate.
+        q_audit = (flag_rate - pi_0) / (1.0 - beta - pi_0)
+        assert q_audit == pytest.approx(q_deploy, abs=1e-9), (
+            f"aggressiveness={aggressiveness}: audit sample is biased"
+        )
+        rates.append(flag_rate)
+
+    # Every conditionally-uniform policy is equally powerful.
+    assert max(rates) - min(rates) < 1e-9
+
+
+def test_violating_conditional_uniformity_is_exploitable() -> None:
+    """The converse: once E[pi | o_a] varies, the adversary exploits it and
+    the audited rate falls strictly below the deployment rate."""
+    from monitor.policy import allocate, best_response
+
+    n = 40
+    ctx = np.full(n, 1.0 / n)
+    priority = np.arange(n, dtype=float)[::-1]
+
+    prev = None
+    for eps in (0.0, 0.5, 0.9):
+        alloc = allocate(priority, ctx, rate=0.1, epsilon=eps)
+        _, q_deploy, q_audit = best_response(alloc.probs, ctx, pi_0=0.05)
+        gap = q_deploy - q_audit
+        if eps == 0.0:
+            assert gap == pytest.approx(0.0, abs=1e-9)
+        else:
+            assert gap > 0, f"eps={eps} should be exploitable"
+        if prev is not None:
+            assert gap >= prev - 1e-12  # exploitability grows with leakage
+        prev = gap
+
+
 def test_harm_unbounded_when_a_context_is_never_audited() -> None:
     """eps = 1 exactly (pi_min = 0) is the genuine cliff: free defection."""
     from monitor.policy import optimal_evasion_horizon
@@ -256,3 +322,57 @@ def test_harm_rate_increases_with_leakage() -> None:
         for eps in (0.0, 0.2, 0.4, 0.6, 0.8)
     ]
     assert all(b >= a - 1e-9 for a, b in zip(rates, rates[1:])), rates
+
+
+# --- Leakage tuning ---------------------------------------------------------
+
+
+def _critical_weight(**kwargs: float) -> float:
+    """Smallest strategic prior at which optimal leakage is exactly zero."""
+    from monitor.tuning import optimal_leakage
+
+    lo, hi = 0.0, 1.0
+    for _ in range(20):
+        mid = (lo + hi) / 2
+        if optimal_leakage(mid, grid=150, **kwargs).epsilon <= 1e-9:  # type: ignore[arg-type]
+            hi = mid
+        else:
+            lo = mid
+    return hi
+
+
+def test_uniform_optimal_against_pure_strategic_adversary() -> None:
+    """With all weight on a strategic adversary, targeting is never worth it."""
+    from monitor.tuning import optimal_leakage
+
+    assert optimal_leakage(1.0, grid=150).epsilon == pytest.approx(0.0, abs=1e-9)
+
+
+def test_targeting_optimal_against_pure_naive_failure() -> None:
+    """With no strategic risk, target as hard as possible."""
+    from monitor.tuning import optimal_leakage
+
+    assert optimal_leakage(0.0, grid=150).epsilon > 0.5
+
+
+def test_critical_weight_falls_with_horizon() -> None:
+    """KEY QUALITATIVE CLAIM. Strategic harm grows as sqrt(T) while naive harm
+    saturates, so a longer deployment tolerates less targeting: the strategic
+    prior needed to rule out targeting shrinks as the horizon grows."""
+    weights = [_critical_weight(horizon=t) for t in (1e4, 1e6, 1e8)]
+    assert weights[0] > weights[1] > weights[2], weights
+
+
+def test_critical_weight_is_small_across_parameters() -> None:
+    """Targeting requires strong confidence that failures are accidental --
+    the threshold stays well below a coin flip everywhere we tested."""
+    for kwargs in (
+        {"concentration": 0.5},
+        {"concentration": 0.99},
+        {"naive_defect_rate": 0.01},
+        {"naive_defect_rate": 0.2},
+        {"audit_rate": 0.02},
+        {"audit_rate": 0.3},
+    ):
+        w = _critical_weight(**kwargs)  # type: ignore[arg-type]
+        assert 0.0 < w < 0.5, f"{kwargs} gave w*={w}"
