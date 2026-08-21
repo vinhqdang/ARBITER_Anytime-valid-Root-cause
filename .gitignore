@@ -231,3 +231,6 @@ __marimo__/
 paper/*.pdf
 !paper/by.pdf
 aamas_template/
+
+# Harness run artifacts (trajectories, response cache)
+runs/
