@@ -83,21 +83,75 @@ empirical rate below `π_0`). So `P(reject) → 0`: the test is valid
 
 ---
 
-## Theorem 2 (Scaling law — status: MEASURED, not yet derived in closed form)
+## Theorem 2 (Scaling law — status: DERIVED and numerically confirmed)
 
-**Measured (see `experiments/scaling_law.py`, locked in
-`test_scaling_law_exponents`):**
+**Setup.** Adversary defects on a mass-`q` set of the thinnest-audited
+contexts. Under `π_min = (1-ε)p`, the audited defection rate is
+`q_audit = q·(1-ε)` (Section on leakage above), and the audited flag rate is
 
-  `B(p, ε, T) ≍ C · sqrt(T) / ((1-ε) · sqrt(p))`,   exponents 0.4876 / 1.0016 / 0.5049.
+  `flag(q) = q_audit(1-β) + (1-q_audit)π_0 = π_0 + κ(1-ε)q`,  where `κ := 1-β-π_0`.
 
-**TODO before this can be stated as a theorem:** derive `C` from first
-principles via the KL small-deviation approximation
-`KL(π_0+δ‖π_0) ≈ δ²/(2π_0(1-π_0))` and the optimality condition
-`d/dq [q · min(rounds(q), T)] = 0` at the interior optimum, matching the
-constant against `optimal_evasion_horizon`'s numerics. Also needs the
-`β` (verifier false-negative rate) dependence made explicit — currently
-folded into the numerics via `audited_flag_rate`, not yet in the closed form
-above.
+**Step 1 (small-deviation KL).** Writing `δ := flag(q) - π_0 = κ(1-ε)q`, the
+standard second-order expansion of the binary KL divergence around `π_0`
+gives, for small `δ`,
+
+  `KL(π_0+δ ‖ π_0) ≈ δ² / (2π_0(1-π_0))`.
+
+**Step 2 (rounds to detection).** The e-process needs
+`audits ≈ log(1/α)/KL` audited samples to reject, and audits arrive at rate
+`p` per round, so
+
+  `rounds(q) ≈ audits/p = 2π_0(1-π_0)log(1/α) / (κ²(1-ε)²p·q²) =: K/q²`,
+
+  `K := 2π_0(1-π_0)log(1/α) / (κ²(1-ε)²p)`.
+
+**Step 3 (optimal evasion rate under a horizon `T`).** Harm is
+`h(q) = q · min(rounds(q), T) = q · min(K/q², T)`. For `q < √(K/T)` this is
+`qT`, increasing; for `q > √(K/T)` it is `K/q`, decreasing. The maximum is
+at the crossover `q* = √(K/T)`, where
+
+  `B := h(q*) = q*·T = T·√(K/T) = √(KT)`.
+
+**Result.**
+
+  `B(p, ε, T) = √( 2π_0(1-π_0)·log(1/α)·T ) / ( (1-β-π_0)·(1-ε)·√p )`.
+
+**Numerical confirmation** (`π_0=0.05, β=0.1, α=0.05`, closed form vs.
+`optimal_evasion_horizon`'s grid search):
+
+| ε | p | T | closed form | measured (grid) | ratio |
+|---|---|---|---|---|---|
+| 0.50 | 0.10 | 1e5 | 1255.23 | 1274.35 | 0.985 |
+| 0.50 | 0.10 | 1e6 | 3969.40 | 3976.14 | 0.998 |
+| 0.50 | 0.10 | 1e7 | 12552.33 | 12547.05 | 1.000 |
+| 0.75 | 0.10 | 1e6 | 7938.79 | 7965.00 | 0.997 |
+| 0.50 | 0.02 | 1e6 | 8875.84 | 8961.95 | 0.990 |
+
+Agreement within 1.7% throughout, confirming both the exponents (`T^{1/2}`,
+`(1-ε)^{-1}`, `p^{-1/2}`) AND the constant. The approximation's own
+consistency condition — `δ = κ(1-ε)q*` should be small relative to `π_0` —
+holds at every row above (e.g. row 2: `δ ≈ 0.0017 ≪ π_0 = 0.05`), so the
+small-deviation step is self-validating in the regime that matters (evasive
+adversaries operate at low audited defection rates by construction — that is
+the whole point of evasion).
+
+*Status: this is now a real closed-form theorem, not a numerology fit.
+Remaining polish: an exact (non-asymptotic) statement replacing the ≈ steps
+with explicit error bounds, which the 8-page draft can defer to
+supplementary if needed.*
+
+## Theorem 3 (Targeting threshold — status: MEASURED, no closed form yet)
+
+The same three-step method applies in principle: `naive_harm(ε)` has a
+similar `flag(q)` structure but with `q` FIXED (not optimized) and a
+targeting *gain* factor `1 + cε/(1-ε)` that saturates at `q_audit = 1`. The
+critical `w*` solves `w·∂B/∂ε|_{ε=0} = (1-w)·(-∂(naive_harm)/∂ε)|_{ε=0}`.
+Both derivatives are well-defined in closed form from the pieces above; the
+saturation nonlinearity in `naive_harm` is the remaining complication before
+this can be written as cleanly as Theorem 2. Left as numeric for the current
+draft (`monitor/tuning.py`); closed-form derivation is a good target if page
+budget and time allow before the 8 October deadline, otherwise stays
+empirical with the sensitivity table already in `project_arbiter...` memory.
 
 ## Theorem 3 (Targeting threshold — status: MEASURED, no closed form yet)
 

@@ -41,9 +41,9 @@
   volume  = {43},
   number  = {7},
   pages   = {908--929},
-  year    = {1998},
-  note    = {VERIFY pages}
+  year    = {1998}
 }
+% TODO before submission: VERIFY pages above.
 
 % [PARTIAL] Probabilistic extension; EXPTIME-completeness of active
 % diagnosability. URL returned: https://inria.hal.science/hal-00930919
@@ -168,9 +168,10 @@
   author  = {Hammar, Kim and Stadler, Rolf},
   title   = {Online Identification of {IT} Systems through Active Causal Learning},
   journal = {arXiv preprint arXiv:2509.02130},
-  year    = {2025},
-  note    = {VERIFY Propositions 1--3}
+  year    = {2025}
 }
+% TODO before submission: VERIFY Propositions 1--3 as characterised in the
+% related-work text (Bayesian-optimal, not frequentist anytime-valid).
 
 
 %%% ===================================================================
@@ -431,9 +432,10 @@
   title   = {Adaptive Auditing of {AI} Systems with
              Anytime-Valid Guarantees},
   journal = {arXiv preprint arXiv:2605.07002},
-  year    = {2026},
-  note    = {No venue listed. VERIFY author given names}
+  year    = {2026}
 }
+% TODO before submission: VERIFY author given names above (surnames only
+% confirmed so far).
 
 % [PARTIAL] Anytime-valid FDR under optional stopping -- the multiplicity
 % machinery we build on.
@@ -441,9 +443,9 @@
   author  = {Wang, Ziyu and Dandapanthula, Sanjit and Ramdas, Aaditya},
   title   = {Stopped e-{BH}: Anytime-Valid {FDR} Control},
   journal = {arXiv preprint arXiv:2502.08539},
-  year    = {2025},
-  note    = {VERIFY exact title and author list}
+  year    = {2025}
 }
+% TODO before submission: VERIFY exact title and author list above.
 
 % [PARTIAL] arXiv:2606.20820
 @article{celeus2026,
@@ -466,12 +468,20 @@
 %%% Benchmarks and observational attribution baselines
 %%% ===================================================================
 
-% [PARTIAL] ICML 2025 Spotlight.
-@inproceedings{whoandwhen2025,
-  title     = {Which Agent Causes Task Failures and When?},
-  booktitle = {International Conference on Machine Learning (ICML)},
-  year      = {2025},
-  note      = {Who\&When. arXiv:2505.00212. VERIFY title and authors}
+% [VERIFIED via arXiv abstract page fetch] Title and full author list
+% confirmed directly. "ICML 2025 Spotlight" was asserted from memory
+% earlier and is NOT confirmed by the arXiv page itself (no venue listed
+% there; v3 marked "camera-ready", submitted Jun 2025) -- cite as an arXiv
+% preprint unless the ICML venue is independently confirmed before
+% submission.
+@article{whoandwhen2025,
+  author  = {Zhang, Shaokun and Yin, Ming and Zhang, Jieyu and Liu, Jiale
+             and Han, Zhiguang and Zhang, Jingyang and Li, Beibin
+             and Wang, Chi and Wang, Huazheng and Chen, Yiran and Wu, Qingyun},
+  title   = {Which Agent Causes Task Failures and When? On Automated
+             Failure Attribution of {LLM} Multi-Agent Systems},
+  journal = {arXiv preprint arXiv:2505.00212},
+  year    = {2025}
 }
 
 @article{whoandwhenpro2026,
@@ -488,15 +498,17 @@
   note    = {VERIFY authors and full title}
 }
 
-% [PARTIAL] ACL 2026 Long, pp. 19888--19905. Correct system name is
-% TraceElephant; "Seeing the Whole Elephant" is the paper title.
+% [VERIFIED via arXiv abstract page fetch] Title, authors, and venue
+% ("Accepted by ACL 2026") all confirmed directly on the abstract page.
 @inproceedings{traceelephant2026,
-  title     = {Seeing the Whole Elephant},
+  author    = {Chen, Mengzhuo and Wang, Junjie and Mu, Fangwen and Wang, Yawen
+               and Liu, Zhe and Feng, Huanxiang and Wang, Qing},
+  title     = {Seeing the Whole Elephant: A Benchmark for Failure
+               Attribution in {LLM}-based Multi-Agent Systems},
   booktitle = {Annual Meeting of the Association for Computational
                Linguistics (ACL)},
   pages     = {19888--19905},
-  year      = {2026},
-  note      = {arXiv:2604.22708. VERIFY authors and full title}
+  year      = {2026}
 }
 
 % [PARTIAL] Multiple plausible attributions per failure -- this MOTIVATES
@@ -508,13 +520,22 @@
   note    = {VERIFY authors and full title}
 }
 
-% [PARTIAL] AAMAS 2026, ACM DOI 10.65109/PNWL9707. Venue-relevant.
-@inproceedings{lumimas2026,
-  title     = {{LumiMAS}},
-  booktitle = {Proc.\ of the 25th International Conference on Autonomous
-               Agents and Multiagent Systems (AAMAS)},
-  year      = {2026},
-  note      = {arXiv:2508.12412. VERIFY authors and full title}
+% [VERIFIED via arXiv abstract page fetch] Title and author list confirmed
+% directly. "AAMAS 2026" + DOI were asserted from memory earlier and are
+% NOT confirmed by the arXiv page itself (no venue listed there; cs.CR/cs.AI,
+% latest revision Feb 2026) -- cite as an arXiv preprint unless the AAMAS
+% venue and DOI are independently confirmed before submission. If AAMAS 2026
+% is confirmed, this becomes venue-relevant precedent worth flagging in the
+% cover letter.
+@article{lumimas2026,
+  author  = {Solomon, Ron and Levi, Yarin Yerushalmi and Vaknin, Lior
+             and Aizikovich, Eran and Baras, Amit and Ohana, Etai
+             and Giloni, Amit and Bose, Shamik and Picardi, Chiara
+             and Elovici, Yuval and Shabtai, Asaf},
+  title   = {{LumiMAS}: A Comprehensive Framework for Real-Time Monitoring
+             and Enhanced Observability in Multi-Agent Systems},
+  journal = {arXiv preprint arXiv:2508.12412},
+  year    = {2026}
 }
 
 % [PARTIAL] Labelled "causal" but observational (transfer entropy / graph
@@ -644,17 +665,6 @@
   note    = {VERIFY full author list (20 authors)}
 }
 
-% [VERIFIED venue] ICLR 2025 -- NOT arXiv-only as first recorded.
-% Foundational sandbagging paper, empirical.
-@inproceedings{vanderweij2025sandbagging,
-  author    = {van der Weij, Teun and others},
-  title     = {{AI} Sandbagging: Language Models can Strategically
-               Underperform on Evaluations},
-  booktitle = {International Conference on Learning Representations (ICLR)},
-  year      = {2025},
-  note      = {arXiv:2406.07358. VERIFY full author list}
-}
-
 % [PARTIAL] Safety-case framework + collusion taxonomy incl. passive
 % self-recognition. Framework, not theorems.
 @article{gardnerchallis2026untrusted,
@@ -774,14 +784,15 @@
 % rate or monitoring budget, cumulative-harm bound, or model of an agent
 % that knows it is being tested and adapts. That absence is our contribution.
 % Code: github.com/GauthierE/anytime-detection-deviation. Venue UNVERIFIED.
+% [VERIFIED via arXiv abstract page fetch] Author list and title confirmed
+% directly. Venue still unconfirmed (no journal-ref on the abstract page).
 @article{gauthier2026anytime,
-  author  = {Gauthier and Bach, Francis and Jordan, Michael I.},
+  author  = {Gauthier, Etienne and Bach, Francis and Jordan, Michael I.},
   title   = {Anytime Detection of Strategic Deviations in
              Multi-Agent Systems},
   journal = {arXiv preprint arXiv:2601.05427},
   year    = {2026},
-  note    = {v3. Cite prominently and distinguish explicitly.
-             VERIFY first author given name and venue}
+  note    = {v3}
 }
 
 % [PARTIAL] Anytime-valid testing of whether observed play matches a
@@ -793,9 +804,9 @@
              and Durmus, Alain and Jordan, Michael I.},
   title   = {Test-then-Punish: A Statistical Approach to Repeated Games},
   journal = {arXiv preprint arXiv:2603.05619},
-  year    = {2026},
-  note    = {VERIFY author given names}
+  year    = {2026}
 }
+% TODO before submission: VERIFY author given names above.
 
 % [PARTIAL] e-values / testing-by-betting foundations.
 @article{ramdas2022evalues,
@@ -803,9 +814,9 @@
              and Shafer, Glenn},
   title   = {Game-Theoretic Statistics and Safe Anytime-Valid Inference},
   journal = {arXiv preprint arXiv:2210.01948},
-  year    = {2022},
-  note    = {VERIFY exact title}
+  year    = {2022}
 }
+% TODO before submission: VERIFY exact title above.
 
 % [PARTIAL] Betting-based auditing; adjacent non-game application.
 @article{chugg2023auditing,
@@ -1010,9 +1021,10 @@
   title   = {{CIAware-Bench}: Benchmarking Control Intervention Awareness
              Across Frontier {LLMs}},
   journal = {arXiv preprint arXiv:2606.11063},
-  year    = {2026},
-  note    = {VERIFY author list and given names}
+  year    = {2026}
 }
+% TODO before submission: VERIFY author list and given names above
+% (Panfilov's given name in particular is still missing).
 
 % [PARTIAL] Trap documents + statistical testing; flags learnable trap
 % features as a weakness -- i.e. an adversary can learn to spot the probe.
@@ -1091,8 +1103,9 @@
   booktitle = {NeurIPS Workshop on Reliable Machine Learning from
                Unreliable Data},
   year      = {2025},
-  note      = {arXiv:2509.26239. VERIFY author given names}
+  note      = {arXiv:2509.26239}
 }
+% TODO before submission: VERIFY author given names above.
 
 % [PARTIAL] Auditing games for sandbagging; no sequential error control.
 @article{taylor2025auditinggames,
@@ -1111,8 +1124,7 @@
                Underperform on Evaluations},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year      = {2025},
-  note      = {arXiv:2406.07358. DUPLICATE of vanderweij2025sandbagging --
-               merge these two before submission}
+  note      = {arXiv:2406.07358}
 }
 
 % [PARTIAL] Anytime-valid machinery at a top venue, no strategic agent.
@@ -1240,13 +1252,21 @@
 
 % [VERIFIED] NeurIPS 2025. Sandbagging can be exposed by noise injection --
 % relevant baseline for probing a strategically underperforming agent.
+% [VERIFIED via arXiv abstract page fetch] Full author list and exact
+% arXiv id (2412.01784, submitted 2 Dec 2024) confirmed directly -- the
+% previously recorded id was a placeholder. "NeurIPS 2025" venue itself
+% still needs independent confirmation before submission.
 @inproceedings{tice2025noise,
-  author    = {Tice, others},
+  author    = {Tice, Cameron and Kreer, Philipp Alexander
+               and Helm-Burger, Nathan and Shahani, Prithviraj Singh
+               and Ryzhenkov, Fedor and Roger, Fabien and Neo, Clement
+               and Haimes, Jacob and Hofst{\"a}tter, Felix
+               and van der Weij, Teun},
   title     = {Noise Injection Reveals Hidden Capabilities of
                Sandbagging Language Models},
   booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
   year      = {2025},
-  note      = {VERIFY full author list}
+  note      = {arXiv:2412.01784}
 }
 
 % [PARTIAL] Anytime-valid acceptance tests for self-evolving agents.
@@ -1262,11 +1282,11 @@
 % government institute stating that models "recognise when they are being
 % tested and adjust their behaviour" -- and treating it as an observed
 % phenomenon with NO formal model. Exactly the gap we fill.
+% TODO before submission: VERIFY exact URL and title against the live page.
 @misc{aisi2026oversight,
   author       = {{UK AI Security Institute}},
   title        = {Will It Become Harder to Oversee {AI} Systems?},
   howpublished = {\url{https://aisi.gov.uk}},
   month        = {5},
-  year         = {2026},
-  note         = {VERIFY exact URL and title}
+  year         = {2026}
 }
