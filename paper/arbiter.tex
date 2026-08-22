@@ -732,6 +732,33 @@ for dropping the guarantee: it is exactly the systems that eventually do
 notice for which an anytime-valid, quantified price of getting monitoring
 wrong will matter.
 
+\section*{AI-Assistance Disclosure}
+\label{sec:ai-disclosure}
+
+In accordance with the AAMAS 2027 policy on AI-assisted technologies, we
+disclose that a commercial large language model assistant was used
+substantively in this work, including in the formation of hypotheses and
+methodology. Its use included: iteratively proposing and adversarially
+testing candidate research framings against the prior-art literatures
+surveyed in Section~\ref{sec:related} (several framings were proposed and
+rejected---found to be either incremental combinations of existing methods
+or already published---before the framing presented here survived
+independent verification); conducting literature search and citation
+verification against primary sources; deriving and numerically validating
+the results in Section~\ref{sec:results}, under author direction and
+correction (for example, an early numerical check of
+Theorem~\ref{thm:w-lower-bound}'s derivative appeared to disagree with the
+closed form by a factor of two, which was traced to a grid-discretisation
+artefact in the optimisation code rather than an error in the theorem, and
+resolved by differentiating the validated closed form analytically instead
+of finite-differencing the discretised numerical optimum); designing and
+implementing the experimental harness and the stress test in
+Section~\ref{sec:stress-test}; and drafting text subsequently reviewed and
+edited by the authors. The authors take full responsibility for the
+correctness of all claims, proofs, citations, and experimental results in
+this paper. A representative summary log of prompts and key methodological
+decision points is provided in the supplementary material.
+
 %%% Issue \balance somewhere in the first column of the final page
 %%% (required for camera-ready).
 
