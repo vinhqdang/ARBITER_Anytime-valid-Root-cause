@@ -468,20 +468,24 @@
 %%% Benchmarks and observational attribution baselines
 %%% ===================================================================
 
-% [VERIFIED via arXiv abstract page fetch] Title and full author list
-% confirmed directly. "ICML 2025 Spotlight" was asserted from memory
-% earlier and is NOT confirmed by the arXiv page itself (no venue listed
-% there; v3 marked "camera-ready", submitted Jun 2025) -- cite as an arXiv
-% preprint unless the ICML venue is independently confirmed before
-% submission.
-@article{whoandwhen2025,
-  author  = {Zhang, Shaokun and Yin, Ming and Zhang, Jieyu and Liu, Jiale
-             and Han, Zhiguang and Zhang, Jingyang and Li, Beibin
-             and Wang, Chi and Wang, Huazheng and Chen, Yiran and Wu, Qingyun},
-  title   = {Which Agent Causes Task Failures and When? On Automated
-             Failure Attribution of {LLM} Multi-Agent Systems},
-  journal = {arXiv preprint arXiv:2505.00212},
-  year    = {2025}
+% [VERIFIED via PMLR + DBLP + Semantic Scholar, independently of the arXiv
+% page] Venue confirmed: ICML 2025, PMLR v267, pp.76583-76599, 13-19 Jul
+% 2025. PMLR page (proceedings.mlr.press/v267/zhang25cq.html) matches title
+% and full 11-author list verbatim. The earlier "ICML 2025 Spotlight" claim
+% is confirmed as to venue; "Spotlight" status itself not separately
+% re-verified.
+@inproceedings{whoandwhen2025,
+  author    = {Zhang, Shaokun and Yin, Ming and Zhang, Jieyu and Liu, Jiale
+               and Han, Zhiguang and Zhang, Jingyang and Li, Beibin
+               and Wang, Chi and Wang, Huazheng and Chen, Yiran and Wu, Qingyun},
+  title     = {Which Agent Causes Task Failures and When? On Automated
+               Failure Attribution of {LLM} Multi-Agent Systems},
+  booktitle = {Proceedings of the 42nd International Conference on
+               Machine Learning (ICML)},
+  volume    = {267},
+  pages     = {76583--76599},
+  year      = {2025},
+  note      = {arXiv:2505.00212}
 }
 
 @article{whoandwhenpro2026,
@@ -520,22 +524,30 @@
   note    = {VERIFY authors and full title}
 }
 
-% [VERIFIED via arXiv abstract page fetch] Title and author list confirmed
-% directly. "AAMAS 2026" + DOI were asserted from memory earlier and are
-% NOT confirmed by the arXiv page itself (no venue listed there; cs.CR/cs.AI,
-% latest revision Feb 2026) -- cite as an arXiv preprint unless the AAMAS
-% venue and DOI are independently confirmed before submission. If AAMAS 2026
-% is confirmed, this becomes venue-relevant precedent worth flagging in the
-% cover letter.
-@article{lumimas2026,
-  author  = {Solomon, Ron and Levi, Yarin Yerushalmi and Vaknin, Lior
-             and Aizikovich, Eran and Baras, Amit and Ohana, Etai
-             and Giloni, Amit and Bose, Shamik and Picardi, Chiara
-             and Elovici, Yuval and Shabtai, Asaf},
-  title   = {{LumiMAS}: A Comprehensive Framework for Real-Time Monitoring
-             and Enhanced Observability in Multi-Agent Systems},
-  journal = {arXiv preprint arXiv:2508.12412},
-  year    = {2026}
+% [VERIFIED via Crossref record for the DOI itself] Venue confirmed: AAMAS
+% 2026, DOI 10.65109/PNWL9707. Crossref's record for that DOI is an exact
+% title/author match, type "proceedings-article", container-title "Proc. of
+% the 25th AAMAS"; the 10.65109 prefix resolves to IFAAMAS itself (not a
+% throwaway registrant), and doi.org/10.65109/PNWL9707 redirects to
+% dl.acm.org (blocked to automated fetch, consistent with a real ACM DL
+% listing rather than disconfirming it). This is now venue-relevant
+% precedent worth naming explicitly in the cover letter, per the earlier
+% note. MINOR DISCREPANCY: the Crossref-record author list transcribed
+% "Waknin" for the second-listed surname where a direct arXiv page fetch
+% gave "Vaknin" -- kept as "Vaknin" here (from the primary arXiv fetch) but
+% flag and cross-check both spellings before camera-ready.
+@inproceedings{lumimas2026,
+  author    = {Solomon, Ron and Levi, Yarin Yerushalmi and Vaknin, Lior
+               and Aizikovich, Eran and Baras, Amit and Ohana, Etai
+               and Giloni, Amit and Bose, Shamik and Picardi, Chiara
+               and Elovici, Yuval and Shabtai, Asaf},
+  title     = {{LumiMAS}: A Comprehensive Framework for Real-Time Monitoring
+               and Enhanced Observability in Multi-Agent Systems},
+  booktitle = {Proc.\ of the 25th International Conference on Autonomous
+               Agents and Multiagent Systems (AAMAS)},
+  year      = {2026},
+  doi       = {10.65109/PNWL9707},
+  note      = {arXiv:2508.12412}
 }
 
 % [PARTIAL] Labelled "causal" but observational (transfer entropy / graph
