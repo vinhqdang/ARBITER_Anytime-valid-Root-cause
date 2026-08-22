@@ -193,7 +193,7 @@ define leakage $\varepsilon$ as the audit policy's deviation from
 conditional uniformity and derive, in closed form and confirmed numerically
 to within 2\%, the harm an optimally evasive adversary extracts before
 detection,
-$$B(p,\varepsilon,T) = \frac{\sqrt{2\pi_0(1-\pi_0)\log(1/\alpha)\,T}}{(1-\beta-\pi_0)(1-\varepsilon)\sqrt{p}}.$$
+\[B(p,\varepsilon,T) = \frac{\sqrt{2\pi_0(1-\pi_0)\log(1/\alpha)\,T}}{(1-\beta-\pi_0)(1-\varepsilon)\sqrt{p}}.\]
 Harm grows only as $\sqrt{T}$ in the deployment horizon and only as
 $1/\sqrt{p}$ in the audit budget---so budget has sharply diminishing
 returns against leakage---but \emph{linearly} in $1/(1-\varepsilon)$, making
@@ -358,7 +358,7 @@ construction it cannot condition on $m$.
 \label{def:leakage}
 $\pi$ is \emph{conditionally uniform} if $\mathbb{E}_m[\pi(o_a,m) \mid o_a] = p$
 for (almost) every $o_a$. Its \emph{leakage} is
-$$\varepsilon := 1 - \frac{\min_{o_a} \mathbb{E}_m[\pi(o_a,m)\mid o_a]}{p} \in [0,1].$$
+\[\varepsilon := 1 - \frac{\min_{o_a} \mathbb{E}_m[\pi(o_a,m)\mid o_a]}{p} \in [0,1].\]
 $\varepsilon = 0$ recovers conditional uniformity; $\varepsilon \to 1$ means
 some agent-visible context is audited with vanishing probability.
 \end{definition}
@@ -390,7 +390,7 @@ round $s$). Then for any history-measurable wager sequence $\lambda_s \in
 the growth-rate-optimal wager against any hypothesised alternative $q >
 \pi_0$, or by the plug-in wager once the empirical audited flag rate falls
 below $\pi_0$),
-$$W_t = \prod_{s\le t}(1-\lambda_s\pi_0) \to 0 \quad \text{a.s.\ as } t\to\infty,$$
+\[W_t = \prod_{s\le t}(1-\lambda_s\pi_0) \to 0 \quad \text{a.s.\ as } t\to\infty,\]
 so $P(\text{reject}) \to 0$. The test remains valid (trivially, since
 $W_t \ge 1/\alpha$ never occurs) but loses all power, and does so by active
 decay: every clean audit is a losing bet, not a neutral one.
@@ -411,14 +411,14 @@ shows is unsafe.
 \label{thm:conditional-uniformity}
 For any strategic agent policy $q(o_a)$, the audited defection rate equals
 the deployment defection rate,
-$$q_{\mathrm{audit}} := \frac{\mathbb{E}[q(o)\,\pi(o)]}{p} = \mathbb{E}[q(o)] =: q_{\mathrm{deploy}},$$
+\[q_{\mathrm{audit}} := \frac{\mathbb{E}[q(o)\,\pi(o)]}{p} = \mathbb{E}[q(o)] =: q_{\mathrm{deploy}},\]
 \emph{if and only if} $\pi$ is conditionally uniform (Definition~\ref{def:leakage}).
 \end{theorem}
 
 \begin{proof}
 Write $f(o_a) := \mathbb{E}_m[\pi(o_a,m)\mid o_a]$. Since $q$ depends only
 on $o_a$,
-$$\mathbb{E}[q(o)\pi(o)] = \mathbb{E}_{o_a}\big[q(o_a)\,\mathbb{E}_m[\pi(o_a,m)\mid o_a]\big] = \mathbb{E}_{o_a}[q(o_a)f(o_a)].$$
+\[\mathbb{E}[q(o)\pi(o)] = \mathbb{E}_{o_a}\big[q(o_a)\,\mathbb{E}_m[\pi(o_a,m)\mid o_a]\big] = \mathbb{E}_{o_a}[q(o_a)f(o_a)].\]
 \emph{Sufficiency.} If $f \equiv p$, this equals $p\cdot\mathbb{E}[q(o_a)] =
 p\cdot q_{\mathrm{deploy}}$, giving $q_{\mathrm{audit}} = q_{\mathrm{deploy}}$.
 \emph{Necessity.} If $f < p$ on a set $A$ of positive measure (the case
@@ -460,35 +460,48 @@ and audited flag rate $\mathrm{flag}(q) = q_{\mathrm{audit}}(1-\beta) +
 \begin{theorem}[Price of leakage]
 \label{thm:scaling}
 Let $\kappa := 1-\beta-\pi_0$ (assumed positive: the verifier is
-better than chance). Over a deployment horizon of $T$ rounds, the harm an
-optimally evasive strategic agent extracts before an anytime-valid e-process
-run at level $\alpha$ detects it satisfies
-$$B(p,\varepsilon,T) \;=\; \frac{\sqrt{2\pi_0(1-\pi_0)\log(1/\alpha)\,T}}{\kappa\,(1-\varepsilon)\,\sqrt{p}}\;\big(1+o(1)\big)$$
-as $\varepsilon \to 1$ or $T \to \infty$ with the other parameters fixed.
+better than chance) and let $\delta^*$ solve
+$\mathrm{KL}(\pi_0+\delta^* \,\|\, \pi_0) = \log(1/\alpha)/(Tp)$. Over a
+deployment horizon of $T$ rounds, the harm an optimally evasive strategic
+agent extracts before an anytime-valid e-process run at level $\alpha$
+detects it satisfies, \emph{exactly},
+\[B(p,\varepsilon,T) \;=\; \frac{\delta^*\, T}{\kappa\,(1-\varepsilon)}.\]
+The $1/(1-\varepsilon)$ dependence is algebraic, not asymptotic; only
+$\delta^*$ requires solving a one-dimensional monotone equation (by
+bisection, in closed form to first order via the small-deviation KL
+expansion below).
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-Write $\delta := \mathrm{flag}(q) - \pi_0 = \kappa(1-\varepsilon)q$. The
-second-order expansion of the binary KL divergence gives, for small
-$\delta$, $\mathrm{KL}(\pi_0+\delta \,\|\, \pi_0) \approx \delta^2/(2\pi_0(1-\pi_0))$.
-Detection requires $\log(1/\alpha)/\mathrm{KL}$ audited samples, arriving at
-rate $p$ per round, so rounds-to-detection is $\mathrm{rounds}(q) \approx
-K/q^2$ with $K := 2\pi_0(1-\pi_0)\log(1/\alpha)/(\kappa^2(1-\varepsilon)^2p)$.
-Harm is $h(q) = q\cdot\min(K/q^2, T)$: increasing in $q$ below the crossover
-$q^* = \sqrt{K/T}$, decreasing above it, so the adversary's optimum is at
-$q^*$, giving $B = h(q^*) = \sqrt{KT}$, which is the claimed expression. The
-$o(1)$ term absorbs the small-$\delta$ approximation error, which vanishes
-as the optimal $\delta^* = \kappa(1-\varepsilon)q^*$ itself shrinks---exactly
-the regime an evasive adversary operates in by construction. \qed
+\begin{proof}
+Write $\delta(q) := \mathrm{flag}(q) - \pi_0 = \kappa(1-\varepsilon)q$
+(exact, from $\mathrm{flag}(q) = q_{\mathrm{audit}}(1-\beta) + (1-q_{\mathrm{audit}})\pi_0$
+and $q_{\mathrm{audit}} = q(1-\varepsilon)$). Harm is $h(q) = q \cdot
+\min(\mathrm{rounds}(q), T)$ where $\mathrm{rounds}(q) =
+\log(1/\alpha)/(\mathrm{KL}(\pi_0+\delta(q)\,\|\,\pi_0)\,p)$; this is
+increasing in $q$ while $\mathrm{rounds}(q) \ge T$ and decreasing once
+$\mathrm{rounds}(q) < T$, so the adversary's optimum $q^*$ is exactly the
+crossover $\mathrm{rounds}(q^*) = T$, i.e.\
+$\mathrm{KL}(\pi_0+\delta(q^*)\,\|\,\pi_0) = \log(1/\alpha)/(Tp)$. The
+right-hand side does not depend on $\varepsilon$, and $\mathrm{KL}(x\,\|\,\pi_0)$
+is strictly monotone in $x$, so this equation pins $\delta(q^*)$ to a
+single value $\delta^*$ that is \emph{independent of $\varepsilon$}.
+Solving $\kappa(1-\varepsilon)q^* = \delta^*$ for $q^*$ and substituting into
+$B = h(q^*) = q^*T$ gives the claimed expression exactly. \qed
 \end{proof}
 
-We confirmed both the exponents and the constant of Theorem~\ref{thm:scaling}
-numerically: fitting $\log B$ against $\log T$, $\log(1-\varepsilon)^{-1}$,
-and $\log p^{-1}$ independently across three parameter sweeps recovers
-exponents $0.4876$, $1.0016$, and $0.5049$ against the predicted $0.5$,
-$1$, $0.5$ (max residual $0.02$ in log-space); the closed-form constant
-matches a direct grid-search optimum of $h(q)$ to within $2\%$ across five
-independent $(p,\varepsilon,T)$ points (Section~\ref{sec:experiments}).
+The small-deviation expansion $\mathrm{KL}(\pi_0+\delta\,\|\,\pi_0) \approx
+\delta^2/(2\pi_0(1-\pi_0))$ gives $\delta^*$'s first-order closed form,
+$\delta^* \approx \sqrt{2\pi_0(1-\pi_0)\log(1/\alpha)/(Tp)}$, matching the
+exact bisection solution to within $2\%$ at the parameters we tested and
+recovering the more familiar form
+$B \approx \sqrt{2\pi_0(1-\pi_0)\log(1/\alpha)T}\,/\,(\kappa(1-\varepsilon)\sqrt{p})$.
+We confirmed both the exponents and the constant numerically: fitting
+$\log B$ against $\log T$, $\log(1-\varepsilon)^{-1}$, and $\log p^{-1}$
+independently across three parameter sweeps recovers exponents $0.4876$,
+$1.0016$, and $0.5049$ against the predicted $0.5$, $1$, $0.5$ (max residual
+$0.02$ in log-space); the closed-form constant matches a direct grid-search
+optimum of $h(q)$ to within $2\%$ across five independent
+$(p,\varepsilon,T)$ points (Section~\ref{sec:experiments}).
 
 Two consequences follow immediately. First, \textbf{budget has sharply
 diminishing returns}: quadrupling the audit rate $p$ only halves extractable
@@ -517,7 +530,7 @@ a naive failure rate $q_0$ and a targeting-concentration parameter $c \in
 [0,1]$ describing how well the monitor's priority signal predicts where
 accidental failures actually occur, the expected harm under leakage
 $\varepsilon$ is
-$$w \cdot B(p,\varepsilon,T) \;+\; (1-w)\cdot h_{\mathrm{naive}}(\varepsilon; q_0, c, T),$$
+\[w \cdot B(p,\varepsilon,T) \;+\; (1-w)\cdot h_{\mathrm{naive}}(\varepsilon; q_0, c, T),\]
 where $h_{\mathrm{naive}}$ is decreasing in $\varepsilon$ (targeting helps
 against a non-reactive failure) while $B$ is increasing in $\varepsilon$ by
 Theorem~\ref{thm:scaling}. The resulting optimisation has a threshold
@@ -529,11 +542,41 @@ $0.03$ at $T=10^8$---because strategic harm grows as $\sqrt{T}$
 (Theorem~\ref{thm:scaling}) while naive harm saturates once detection
 happens well within the horizon. \textbf{The longer a system is deployed,
 the less suspicion of strategic behaviour is required before uniform
-auditing dominates any targeted alternative.} A closed-form expression for
-$w^*$ follows the same small-deviation expansion as
-Theorem~\ref{thm:scaling} applied to both harm terms simultaneously; we
-leave its derivation to an extended version and report the threshold
-numerically here.
+auditing dominates any targeted alternative.}
+
+Let $\delta_0 := \kappa q_0$, $\mathrm{flag}_0 := \pi_0+\delta_0$,
+$D := \log\!\big(\mathrm{flag}_0(1-\pi_0)\big) - \log\!\big(\pi_0(1-\mathrm{flag}_0)\big)$,
+and $B_0' := \delta^*T/\kappa$ (the exact slope
+$\partial B/\partial\varepsilon|_0$ from Theorem~\ref{thm:scaling}). Define
+$N := q_0\, c\, \delta_0\, D\, \log(1/\alpha) \,/\, \big(p\,\mathrm{KL}(\mathrm{flag}_0\,\|\,\pi_0)^2\big)$,
+the exact value of $-\partial h_{\mathrm{naive}}/\partial\varepsilon|_0$.
+
+\begin{theorem}[A certified lower bound on $w^*$]
+\label{thm:w-lower-bound}
+$w_{\mathrm{lb}} := N/(B_0' + N)$ satisfies $w_{\mathrm{lb}} \le w^*$: for
+any $w < w_{\mathrm{lb}}$, targeting strictly reduces expected harm, with no
+search over $\varepsilon$ required to know this.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+$\varepsilon=0$ being a local minimum of $w\cdot B(\varepsilon) +
+(1-w)\cdot h_{\mathrm{naive}}(\varepsilon)$ is necessary, but not
+sufficient, for it to be the global minimum; the threshold at which it
+becomes a local minimum is exactly where the one-sided derivative at
+$\varepsilon=0$ changes sign, giving $w_{\mathrm{lb}}$ as stated. Since
+local optimality is necessary for global optimality, $w \ge w_{\mathrm{lb}}$
+is necessary for $\varepsilon^*=0$ to be globally optimal, i.e.\
+$w_{\mathrm{lb}} \le w^*$. \qed
+\end{proof}
+
+We verified $w_{\mathrm{lb}} \le w^*$ empirically as a genuine, non-vacuous
+bound across three parameter regimes, sitting at $83$--$91\%$ of the true,
+numerically-optimised threshold in each (e.g.\ $w_{\mathrm{lb}}=0.061$
+against a true $w^*=0.073$ at our baseline parameters). The gap is the
+honest cost of a local, tangent-at-zero criterion versus the true global
+optimum; closing it fully would require characterising the entire harm
+curve's shape rather than its slope at one point, and does not appear to
+admit as clean a closed form.
 
 \textbf{The resulting algorithm} is therefore: (i) estimate $w$ from
 operational context (are sub-agents adversarially fine-tuned, externally
@@ -646,17 +689,23 @@ its calibration under the same evaluation-awareness pressure we stress-test
 in Section~\ref{sec:stress-test} is a live concern, and our guarantee should
 be read as conditional on that calibration holding.
 
-\textbf{Theorem~\ref{thm:scaling} is asymptotic in the small-deviation
-regime.} The KL approximation underlying it is self-consistent in exactly
-the regime an evasive adversary operates in (low audited defection rate by
-construction), which our numerical checks confirm, but a non-asymptotic
-version with explicit error bounds is left to an extended version.
+\textbf{Theorem~\ref{thm:scaling}'s $1/(1-\varepsilon)$ shape is exact; only
+its constant $\delta^*$ is approximated in closed form.} The quadratic-KL
+expansion used for $\delta^*$ is self-consistent in exactly the regime an
+evasive adversary operates in (low audited defection rate by construction),
+matching the exact bisection solution to within $2\%$; a fully
+non-asymptotic statement would replace that approximation with the exact
+transcendental solution throughout, which is already how our implementation
+computes it (Section~\ref{sec:algorithm}'s use of $\delta^*$).
 
-\textbf{We do not give a closed form for the operating threshold $w^*$.}
-Section~\ref{sec:algorithm}'s threshold is numerically established across a
-range of parameters but not yet derived in closed form; the same method that
-produced Theorem~\ref{thm:scaling} should apply, applied jointly to the
-strategic and naive harm terms.
+\textbf{Our closed form for $w^*$ is a lower bound, not an exact
+threshold.} Theorem~\ref{thm:w-lower-bound} gives $w_{\mathrm{lb}} \le w^*$
+from a local (tangent-at-$\varepsilon=0$) criterion, verified at
+$83$--$91\%$ of the true value across tested parameters; it is a genuine,
+one-sided operational guarantee (below $w_{\mathrm{lb}}$, targeting
+provably helps) but does not pin down $w^*$ exactly. Doing so would require
+characterising the full shape of the harm trade-off, not just its slope at
+one point.
 
 \textbf{Our empirical stress test is a negative result on three models and
 one task family.} It does not establish that no deployed model can exploit

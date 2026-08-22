@@ -145,3 +145,75 @@ def optimal_leakage(
 def sweep_weights(weights: tuple[float, ...], **kwargs: float) -> list[TuningResult]:
     """Optimal leakage across operator beliefs -- the tuning curve."""
     return [optimal_leakage(float(w), **kwargs) for w in weights]  # type: ignore[arg-type]
+
+
+def exact_delta_star(
+    audit_rate: float, pi_0: float, horizon: float, alpha: float = 0.05
+) -> float:
+    """The audited-flag-rate deviation at the strategic optimum, EXACTLY.
+
+    At the crossover q* (Theorem 2's proof), the audited flag rate satisfies
+    KL(pi_0 + delta*, pi_0) = log(1/alpha) / (horizon * audit_rate) exactly.
+    The right side is a CONSTANT independent of epsilon, so delta* -- and
+    hence the (1-eps)^-1 shape of B(eps) = delta*.horizon / (kappa.(1-eps))
+    -- is exact, not a small-deviation artefact. Only this one transcendental
+    equation needs solving; the quadratic-KL closed form in Theorem 2 is
+    just its first-order solution.
+    """
+    kl_target = math.log(1.0 / alpha) / (horizon * audit_rate)
+    lo, hi = 1e-12, 1.0 - pi_0 - 1e-9
+    for _ in range(80):
+        mid = (lo + hi) / 2.0
+        if kl_bernoulli(pi_0 + mid, pi_0) < kl_target:
+            lo = mid
+        else:
+            hi = mid
+    return hi
+
+
+def w_star_lower_bound(
+    audit_rate: float,
+    pi_0: float,
+    horizon: float,
+    defect_rate: float,
+    concentration: float,
+    beta: float = 0.0,
+    alpha: float = 0.05,
+) -> float:
+    """A certified LOWER BOUND on the true operating threshold w*.
+
+    Derived from the sign of d/deps[w.B(eps) + (1-w).naive_harm(eps)] at
+    eps=0, using EXACT (non-quadratic) derivatives on both sides:
+
+      dB/deps|_0     = delta*.horizon/kappa    (exact, via exact_delta_star)
+      d(naive)/deps|_0 = -defect_rate.log(1/alpha)/audit_rate
+                          . dKL/dflag(flag_0) . kappa.defect_rate.concentration
+                          / KL(flag_0, pi_0)^2                (exact)
+
+    w := this ratio makes eps=0 a LOCAL minimum of expected harm. Because
+    eps=0 becoming a local minimum is NECESSARY (not sufficient) for it to
+    be the GLOBAL minimum, w_star_lower_bound <= true w*: for any w below
+    this bound, targeting strictly helps, with no numerics required to know
+    that. Confirmed numerically to sit below the true (grid-search) w* by
+    roughly 15-20% at tested parameters -- a valid, cheap, one-sided
+    guarantee, not a full closed form for w* itself.
+    """
+    kappa = 1.0 - beta - pi_0
+    delta_star = exact_delta_star(audit_rate, pi_0, horizon, alpha)
+    dB_deps = delta_star * horizon / kappa
+
+    delta0 = kappa * defect_rate
+    flag0 = pi_0 + delta0
+    kl0 = kl_bernoulli(flag0, pi_0)
+    dkl_dflag = math.log(flag0 * (1.0 - pi_0) / (pi_0 * (1.0 - flag0)))
+    dnaive_deps = (
+        -defect_rate
+        * math.log(1.0 / alpha)
+        / audit_rate
+        * dkl_dflag
+        * delta0
+        * concentration
+        / kl0**2
+    )
+
+    return (-dnaive_deps) / (dB_deps - dnaive_deps)

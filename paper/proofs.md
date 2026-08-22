@@ -140,18 +140,78 @@ Remaining polish: an exact (non-asymptotic) statement replacing the ≈ steps
 with explicit error bounds, which the 8-page draft can defer to
 supplementary if needed.*
 
-## Theorem 3 (Targeting threshold — status: MEASURED, no closed form yet)
+### Upgrade: the `(1-ε)^{-1}` shape is EXACT, not asymptotic
 
-The same three-step method applies in principle: `naive_harm(ε)` has a
-similar `flag(q)` structure but with `q` FIXED (not optimized) and a
-targeting *gain* factor `1 + cε/(1-ε)` that saturates at `q_audit = 1`. The
-critical `w*` solves `w·∂B/∂ε|_{ε=0} = (1-w)·(-∂(naive_harm)/∂ε)|_{ε=0}`.
-Both derivatives are well-defined in closed form from the pieces above; the
-saturation nonlinearity in `naive_harm` is the remaining complication before
-this can be written as cleanly as Theorem 2. Left as numeric for the current
-draft (`monitor/tuning.py`); closed-form derivation is a good target if page
-budget and time allow before the 8 October deadline, otherwise stays
-empirical with the sensitivity table already in `project_arbiter...` memory.
+The small-deviation step above is only needed to get a *closed form* for the
+constant; the *shape* of `B` in `ε` is exact. At the crossover `q*`, the
+optimality condition is `rounds(q*) = T`, i.e.
+`KL(flag(q*), π_0) = log(1/α)/(Tp) =: KL_target` — and the right side does
+not depend on `ε`. Since `KL(x, π_0)` is monotone in `x`, this equation has
+a UNIQUE solution `flag* = π_0 + δ*`, and `δ*` is therefore a **constant
+independent of ε**. Because `flag(q) = π_0 + κ(1-ε)q` (exact, no
+approximation), the optimal `q*(ε) = δ*/(κ(1-ε))`, and
+
+  `B(ε) = q*(ε)·T = δ*·T/κ · 1/(1-ε)`
+
+**exactly** — the `1/(1-ε)` factor is algebra, not approximation. Only `δ*`
+needs solving, via the one-line bisection `exact_delta_star` in
+`monitor/tuning.py` (solves `KL(π_0+δ, π_0) = KL_target` directly). The
+small-deviation quadratic KL approximation used above is recoverable as
+`δ*`'s first-order solution to this same equation — confirmed numerically to
+agree with the exact bisection to ~2% (`test_exact_delta_star_matches_quadratic_approximation`).
+This strengthens Theorem 2's statement: replace `κ(1-ε)√p` in the
+denominator with `κ` implicit inside `δ*` solved exactly, and the theorem
+holds with no `o(1)` hedge on the *shape*, only on which value of `δ*` is
+used for the constant.
+
+## Theorem 3 (Targeting threshold)
+
+### A certified lower bound (status: DERIVED, verified as a genuine one-sided bound)
+
+The critical `w*` solves `w·∂B/∂ε|_{ε=0} = (1-w)·(-∂(naive_harm)/∂ε)|_{ε=0}`,
+and **both derivatives can be computed exactly, without the small-deviation
+approximation**:
+
+- `∂B/∂ε|_0 = δ*·T/κ` — immediate from the exact shape above.
+- `∂(naive_harm)/∂ε|_0`: `naive_harm(ε) = q_0 · rounds(ε)` with
+  `flag(ε) = π_0 + κq_0·g(ε)`, `g(ε) = 1 + cε/(1-ε)`, `g'(0) = c`. Using the
+  exact (non-quadratic) derivative of the binary KL,
+  `∂KL(x,π_0)/∂x = \log\frac{x(1-π_0)}{π_0(1-x)}`, the chain rule gives
+  a closed form (implemented as `w_star_lower_bound` in `monitor/tuning.py`)
+  — confirmed to match a direct finite difference of `naive_harm` to 3
+  significant figures (`test_naive_harm_derivative_matches_finite_difference`;
+  finite differences are trustworthy here because, unlike `strategic_harm`,
+  `naive_harm` has no internal grid search to introduce discretisation
+  noise — this distinction cost real debugging time: an earlier attempt to
+  validate `∂B/∂ε` by finite-differencing `strategic_harm` directly
+  produced a value ≈2× too large at every step size from `1e-2` to `1e-5`,
+  which turned out to be the derivative of a single FROZEN grid point in
+  `optimal_evasion_horizon`'s internal argmax, not the continuous envelope
+  — resolved by differentiating the validated closed form analytically
+  instead of finite-differencing the discretised numerical optimum).
+
+**What this threshold proves, precisely.** Call it `w_lb`. Because
+`eps=0` becoming a local minimum of expected harm is *necessary but not
+sufficient* for it to be the *global* minimum, `w_lb ≤ w*` (true global
+threshold) always — a rigorous one-sided guarantee: **for any `w < w_lb`,
+uniform allocation is provably not optimal; some targeting strictly
+reduces expected harm.** It is not a full closed form for `w*` itself.
+
+**Numerically confirmed as a genuine (non-vacuous) bound**, three parameter
+regimes, `test_w_star_lower_bound_is_a_true_lower_bound`:
+
+| audit_rate | π₀ | T | q₀ | c | β | `w_lb` | true `w*` (fine bisection) | ratio |
+|---|---|---|---|---|---|---|---|---|
+| 0.1 | 0.05 | 1e6 | 0.05 | 0.8 | 0.0 | 0.0608 | 0.0729 | 0.834 |
+| 0.1 | 0.05 | 1e4 | 0.05 | 0.8 | 0.0 | 0.3823 | 0.4308 | 0.887 |
+| 0.2 | 0.10 | 1e5 | 0.02 | 0.5 | 0.1 | 0.2479 | 0.2723 | 0.910 |
+
+Consistently 83–91% of the true value across regimes — a real, useful bound,
+not a coincidence at one parameter point. The remaining gap is the honest
+cost of a *local* (tangent-at-`ε=0`) criterion versus the *global*
+optimum; closing it fully would require characterising the entire harm
+curve's shape (not just its slope at one point), which does not appear to
+admit a clean closed form and is left as numeric (`optimal_leakage`).
 
 ## Theorem 3 (Targeting threshold — status: MEASURED, no closed form yet)
 
